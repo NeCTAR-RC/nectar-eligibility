@@ -1,0 +1,8 @@
+@use "mixins" as *;
+
+.org-selection {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-sm;
+  margin-top: $gap-sm;
+}

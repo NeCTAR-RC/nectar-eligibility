@@ -1,0 +1,15 @@
+@use "mixins" as *;
+@use "utilities" as *;
+
+.nav {
+  @include nav-actions;
+}
+
+.buttons {
+  @include action-buttons;
+  gap: $gap-md;
+}
+
+.start-over {
+  @include start-over;
+}

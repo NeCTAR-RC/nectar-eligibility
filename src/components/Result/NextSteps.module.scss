@@ -1,0 +1,7 @@
+@use "mixins" as *;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: pxToRem(10);
+}

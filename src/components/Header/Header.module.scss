@@ -1,0 +1,58 @@
+@use "@ardc-ui/react/styles/variables" as *;
+@use "mixins" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: $color-white;
+  border-bottom: 1px solid rgba($color-black, 0.1);
+
+  @media print {
+    position: static;
+  }
+}
+
+.container {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: pxToRem(25);
+
+  @include respond-below(lg) {
+    padding-block: pxToRem(15);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: pxToRem(6);
+  text-decoration: none;
+  color: rgba($color-black, 0.9);
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: rgba($color-black, 0.9);
+  }
+}
+
+.logo {
+  height: pxToRem(40);
+
+  @include respond-below(md) {
+    height: pxToRem(32);
+  }
+}
+
+.title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  color: rgba($color-black, 0.7);
+
+  @include respond-below(sm) {
+    display: none;
+  }
+}

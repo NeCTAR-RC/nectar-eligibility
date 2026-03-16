@@ -1,0 +1,17 @@
+@use "mixins" as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-md;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-sm;
+
+  h5 {
+    margin: 0;
+  }
+}

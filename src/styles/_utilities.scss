@@ -1,0 +1,27 @@
+@use "mixins" as *;
+
+@mixin action-buttons {
+  display: flex;
+  gap: pxToRem(12);
+  flex-wrap: wrap;
+
+  > * {
+    flex: 1;
+    justify-content: center;
+  }
+
+  @include respond-below(sm) {
+    flex-direction: column;
+  }
+}
+
+@mixin nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-lg;
+}
+
+@mixin start-over {
+  display: flex;
+  justify-content: center;
+}

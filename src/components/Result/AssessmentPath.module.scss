@@ -1,0 +1,34 @@
+@use "@ardc-ui/react/styles/variables" as *;
+@use "mixins" as *;
+
+.timeline {
+  border-left: 3px solid rgba($ardc-purple, 0.25);
+  padding-left: pxToRem(20);
+  margin-left: pxToRem(5);
+}
+
+.entry {
+  position: relative;
+  padding-bottom: pxToRem(20);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(pxToRem(-20) - 1.5px - pxToRem(6));
+    top: pxToRem(6);
+    width: pxToRem(12);
+    height: pxToRem(12);
+    border-radius: 50%;
+    background-color: $ardc-purple;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.question {
+  font-style: italic;
+  font-weight: $font-weight-semibold;
+  margin-bottom: pxToRem(4);
+}

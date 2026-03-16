@@ -1,0 +1,59 @@
+@use "@ardc-ui/react/styles/variables" as *;
+@use "mixins" as *;
+
+.page {
+  background-color: $color-gray-100;
+  flex: 1;
+}
+
+.header {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: pxToRem(16);
+  text-align: center;
+  padding-block: pxToRem(32);
+}
+
+.title {
+  &:focus {
+    outline: none;
+  }
+
+  @include respond-below(sm) {
+    font-size: pxToRem(28);
+  }
+}
+
+.subtitle {
+  font-size: pxToRem(20);
+  color: $color-gray-700;
+  max-width: pxToRem(750);
+  margin-inline: auto;
+
+  @include respond-below(sm) {
+    font-size: $font-size-base;
+  }
+}
+
+.body {
+  @include container;
+  padding-bottom: pxToRem(48);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-lg;
+  background: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: $border-radius;
+  padding: pxToRem(32);
+  max-width: pxToRem(800);
+  margin-inline: auto;
+
+  @include respond-below(sm) {
+    padding: pxToRem(20);
+  }
+}
