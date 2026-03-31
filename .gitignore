@@ -23,8 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.npmrc
-
 # Design mockups and reference docs
 *.pdf
 Eligibility Assessment Tool Content.md

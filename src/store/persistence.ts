@@ -34,7 +34,6 @@ export function saveToStorage(
   try {
     const data = { v: FLOW_VERSION, t: Date.now(), ...answers };
     localStorage.setItem(storageKey(sessionId), JSON.stringify(data));
-    purgeExpiredSessions();
   } catch {
     // localStorage may be unavailable (private browsing, quota exceeded)
   }
@@ -84,7 +83,7 @@ export function clearSession(sessionId: string): void {
   }
 }
 
-function purgeExpiredSessions(): void {
+export function purgeExpiredSessions(): void {
   try {
     const now = Date.now();
     for (let i = localStorage.length - 1; i >= 0; i--) {

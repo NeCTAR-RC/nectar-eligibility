@@ -51,6 +51,10 @@ src/
 │   ├── Header/                  # ARDC Nectar branding + Support Centre link
 │   ├── Footer/                  # ARDC footer (logos, newsletter, quick links)
 │   └── Layout/                  # Skip-to-content + Header + main + Footer
+├── hooks/
+│   └── useAnalytics.ts          # GA4 initialization hook (called in App.tsx)
+├── services/
+│   └── analytics.ts             # GA4 event tracking functions
 ├── store/
 │   ├── types.ts                 # Assessment types, step IDs, enums
 │   ├── flowEngine.ts            # Pure flow functions (resolveNextStep, resolveOutcome, etc.)
@@ -250,7 +254,146 @@ Three-tier gap system for flex/grid layouts — deeper nesting uses tighter gaps
 
 - Conventional commits: `feat(scope): subject`, `fix(scope): subject`
 - Branch naming: `feature/`, `fix/`, `docs/`, `refactor/`
-- Default branch: `master`, merge via PR with merge commits
+- Default branch: `master`, code review via Gerrit
+
+## Analytics (Google Analytics 4)
+
+The application uses [Google Analytics 4](https://analytics.google.com/) via the [`react-ga4`](https://www.npmjs.com/package/react-ga4) library to track user behaviour through the assessment flow. Analytics are entirely client-side — no backend required.
+
+### GA4 Properties
+
+| Environment | Property name                   |
+| ----------- | ------------------------------- |
+| Non-prod    | Nectar Eligibility - Non-Prod   |
+| Production  | Nectar Eligibility - Production |
+
+Measurement IDs are managed via environment variables and must not be committed to source. See the team's password manager or CI/CD configuration for the actual values.
+
+### Configuration
+
+Analytics are configured via environment variables. Create a `.env.local` file (gitignored via `*.local`) from the provided template:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable                 | Description                           | Default |
+| ------------------------ | ------------------------------------- | ------- |
+| `VITE_GA_MEASUREMENT_ID` | GA4 measurement ID (`G-XXXXXXX`)      | —       |
+| `VITE_GA_DEBUG_MODE`     | Enable GA4 DebugView (`true`/`false`) | —       |
+
+For production deployments, set `VITE_GA_MEASUREMENT_ID` to the production measurement ID via CI/CD environment variables. If no measurement ID is provided, analytics are silently disabled — the app works normally without it.
+
+### Events
+
+Events fire on step **exit** (when the user clicks Continue, Previous, or Start over), not on step entry. This avoids inflated counts from users toggling answers before committing.
+
+| Event                  | When fired                                        | Parameters                                                       |
+| ---------------------- | ------------------------------------------------- | ---------------------------------------------------------------- |
+| `step_completed`       | User clicks Continue                              | `step_id`, `answer_value`, `question_number`, `session_id`       |
+| `step_back`            | User clicks Previous                              | `from_step`, `to_step`, `session_id`                             |
+| `assessment_complete`  | User clicks Continue on eligibility info step     | `outcome`, `path`, `session_id`, `is_repeat`, `duration_seconds` |
+| `result_viewed`        | Result page loads                                 | `outcome`, `session_id`                                          |
+| `assessment_abandoned` | Start over clicked before reaching result         | `last_step`, `session_id`                                        |
+| `assessment_restarted` | Start over clicked on result page                 | `outcome`, `session_id`                                          |
+| `pdf_download`         | Download PDF button clicked                       | `outcome`, `session_id`, `is_first_download`                     |
+| `cta_click`            | Apply/Explore link clicked on result              | `outcome`, `cta_label`, `session_id`                             |
+| `session_restored`     | Returning user's session loaded from localStorage | `session_id`                                                     |
+| `session_expired`      | Deep link points to expired/missing session       | `session_id`                                                     |
+
+### Key parameters explained
+
+- **`session_id`** — Incremental ID per assessment run (per browser). Each "Start over" creates a new session. Sent on every event for granular analysis.
+- **`is_repeat`** — `"true"` if this browser has completed an assessment before. Uses a localStorage flag (`nectar-eligibility:has-completed`). Allows filtering first-time vs. repeat completions.
+- **`duration_seconds`** — Wall-clock seconds from the first `step_completed` to `assessment_complete`. Resets on Start over. If a user leaves and returns, duration is 0 (the clock runs in-memory only).
+- **`is_first_download`** — `"true"` if this is the user's first-ever PDF download (per browser). Uses a localStorage flag (`nectar-eligibility:has-downloaded-pdf`).
+
+### GA4 custom definitions setup
+
+Custom parameters must be registered in GA4 Admin before they appear in reports. Do this **once per property** (non-prod and production).
+
+**Admin > Data display > Custom definitions > Custom dimensions > Create custom dimension:**
+
+| Dimension name    | Scope | Event parameter     |
+| ----------------- | ----- | ------------------- |
+| Step ID           | Event | `step_id`           |
+| Answer Value      | Event | `answer_value`      |
+| Outcome           | Event | `outcome`           |
+| Assessment Path   | Event | `path`              |
+| Last Step         | Event | `last_step`         |
+| From Step         | Event | `from_step`         |
+| To Step           | Event | `to_step`           |
+| CTA Label         | Event | `cta_label`         |
+| Is Repeat         | Event | `is_repeat`         |
+| Is First Download | Event | `is_first_download` |
+
+Note: `session_id` is sent on every event but intentionally not registered as a custom dimension due to high cardinality. GA4's built-in session tracking handles session grouping. The raw `session_id` remains available via BigQuery export if needed for deep analysis.
+
+**Admin > Data display > Custom definitions > Custom metrics > Create custom metric:**
+
+| Metric name      | Scope | Event parameter    | Unit     |
+| ---------------- | ----- | ------------------ | -------- |
+| Duration Seconds | Event | `duration_seconds` | Seconds  |
+| Question Number  | Event | `question_number`  | Standard |
+
+**Admin > Data display > Events > + Create event > Create with code:**
+
+Mark `assessment_complete` as a key event. Toggle "Mark as key event" on, keep counting method as "Once per event". This surfaces it on the main GA4 dashboard.
+
+### What GA4 tracks automatically
+
+With Enhanced Measurement enabled (configured on both properties), GA4 automatically collects:
+
+- **Page views** — tracks each step URL change, useful for funnel analysis
+- **Scrolls** — 90% scroll depth
+- **Outbound clicks** — clicks to external links (Apply, Explore, service links)
+- **User location** — approximate geo from IP (country/city level)
+- **Device and browser** — device category (mobile/tablet/desktop), OS, browser
+- **Unique users** — via GA4's built-in `client_id` cookie
+
+These require no code — they work out of the box.
+
+### Handling repeat users
+
+A single user can complete the assessment multiple times (each "Start over" creates a new `session_id`). Events are **not deduplicated** — every run fires its own events. This is intentional:
+
+- **Total event counts** reflect actual usage volume (useful for infrastructure capacity)
+- **Unique users** can be derived from GA4's built-in Active Users metric
+- **`is_repeat`** on `assessment_complete` lets you filter to first-time completions only
+- **`session_id`** lets you count distinct assessment runs per user
+- **`is_first_download`** on `pdf_download` identifies the meaningful first PDF download vs. curious re-downloads
+
+### Architecture
+
+```
+src/
+├── services/
+│   └── analytics.ts        # Core: init, event functions, duration clock, localStorage flags
+├── hooks/
+│   └── useAnalytics.ts     # React hook: initializes GA4 on mount (called in App.tsx)
+├── store/
+│   ├── useAssessmentNav.ts  # Fires: step_completed, step_back, assessment_complete, assessment_abandoned, assessment_restarted
+│   └── useHydration.ts      # Fires: session_restored, session_expired
+└── components/
+    └── Result/
+        └── ResultPage.tsx   # Fires: result_viewed, pdf_download, cta_click
+```
+
+All event functions are defined in `analytics.ts` and imported where needed. If `VITE_GA_MEASUREMENT_ID` is not set, `initializeAnalytics()` returns early and all tracking functions silently no-op.
+
+### Testing with GA4 DebugView
+
+1. Set `VITE_GA_DEBUG_MODE=true` in `.env.local`
+2. Run `pnpm dev`
+3. Open the app in your browser
+4. In GA4: **Admin > DebugView** (under the non-prod property)
+5. Events should appear in real-time as you navigate the assessment
+
+DebugView shows each event with its parameters, making it easy to verify tracking is correct before deploying to production.
+
+## AI Usage
+
+This project uses AI-assisted development via [Claude Code](https://claude.ai/claude-code) (Anthropic). AI was used for code generation, debugging, and refactoring — all output was reviewed and tested by a human developer before committing.
 
 ## Notes
 

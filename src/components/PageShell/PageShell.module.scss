@@ -17,6 +17,8 @@
 }
 
 .title {
+  font-size: pxToRem(28);
+
   &:focus {
     outline: none;
   }

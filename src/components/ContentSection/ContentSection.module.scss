@@ -11,7 +11,8 @@
   flex-direction: column;
   gap: $gap-sm;
 
-  h5 {
+  h2 {
+    font-size: pxToRem(20);
     margin: 0;
   }
 }

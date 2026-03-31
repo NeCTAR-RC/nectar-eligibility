@@ -30,9 +30,9 @@ export default function EligibilityInfo({ headingRef }: Props) {
     <div className={styles.info}>
       <div className={styles.header}>
         {OUTCOME_ICONS[outcome]}
-        <h5 ref={headingRef} tabIndex={-1}>
+        <h2 ref={headingRef} tabIndex={-1}>
           {content.heading}
-        </h5>
+        </h2>
       </div>
       <p>
         <strong>{content.body}</strong>

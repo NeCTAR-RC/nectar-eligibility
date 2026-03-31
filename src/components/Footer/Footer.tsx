@@ -52,7 +52,6 @@ export default function Footer() {
             <Link
               href="https://ardc.edu.au/news-and-events/subscribe/"
               target="_blank"
-              rel="noopener noreferrer"
               variant="primary"
               iconAfter="arrow-up-right-from-square"
               chevronRight

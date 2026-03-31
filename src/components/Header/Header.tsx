@@ -17,7 +17,6 @@ export default function Header() {
         <Link
           href="https://support.ehelp.edu.au"
           target="_blank"
-          rel="noopener noreferrer"
           variant="outline-primary"
           iconAfter="arrow-up-right-from-square"
           aria-label="Support Centre (opens in a new tab)"

@@ -11,7 +11,7 @@ declare module "html2pdf.js" {
     };
     jsPDF?: {
       unit?: string;
-      format?: string;
+      format?: string | [number, number];
       orientation?: "portrait" | "landscape";
     };
     enableLinks?: boolean;
@@ -27,6 +27,7 @@ declare module "html2pdf.js" {
     save(): Promise<void>;
     then(callback: (this: Html2PdfWorker) => void): Html2PdfWorker;
     get(type: "pdf", callback: (pdf: JsPdfInstance) => void): Html2PdfWorker;
+    opt: Html2PdfOptions;
     prop: {
       container: HTMLElement;
       pdf: JsPdfInstance;
@@ -35,6 +36,7 @@ declare module "html2pdf.js" {
 
   interface JsPdfInstance {
     setPage(page: number): void;
+    deletePage(page: number): void;
     link(
       x: number,
       y: number,

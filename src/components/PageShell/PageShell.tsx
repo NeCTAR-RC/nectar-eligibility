@@ -17,9 +17,9 @@ export default function PageShell({
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h3 ref={headingRef} tabIndex={-1} className={styles.title}>
+        <h1 ref={headingRef} tabIndex={-1} className={styles.title}>
           {title}
-        </h3>
+        </h1>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
       </header>
       <div className={styles.body}>

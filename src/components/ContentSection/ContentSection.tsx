@@ -22,9 +22,9 @@ export default function ContentSection({
   return (
     <div className={sectionClass}>
       <div className={styles.heading}>
-        <h5 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+        <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
           {title}
-        </h5>
+        </h2>
         {description && <p>{description}</p>}
       </div>
       {children}

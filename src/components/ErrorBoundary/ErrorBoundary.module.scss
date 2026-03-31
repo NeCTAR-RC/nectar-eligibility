@@ -1,0 +1,24 @@
+@use "@ardc-ui/react/styles/variables" as *;
+@use "mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $gap-md;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: $gap-lg;
+  text-align: center;
+  font-family: $font-family-base;
+}
+
+.heading {
+  font-size: pxToRem(28);
+}
+
+.message {
+  color: $color-gray-700;
+  max-width: pxToRem(400);
+}

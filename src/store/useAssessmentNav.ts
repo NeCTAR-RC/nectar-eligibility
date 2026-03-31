@@ -11,6 +11,14 @@ import {
 } from "./flowEngine";
 import { clearSession, generateSessionId } from "./persistence";
 import type { StepId } from "./types";
+import { answerValueForStep } from "./answerValue";
+import {
+  trackStepCompleted,
+  trackStepBack,
+  trackAssessmentComplete,
+  trackAssessmentAbandoned,
+  trackAssessmentRestarted,
+} from "../services/analytics";
 
 export function useAssessmentNav() {
   const location = useLocation();
@@ -62,8 +70,27 @@ export function useAssessmentNav() {
     if (!sessionId) return;
     const nextStepId = resolveNextStep(currentStepId, answers);
 
+    trackStepCompleted(
+      currentStepId,
+      answerValueForStep(currentStepId, answers),
+      stepHistory.length + 1,
+      sessionId,
+    );
+
     if (nextStepId === "eligibility-info" || nextStepId === "result") {
       useAssessmentStore.getState().setOutcome(resolveOutcome(answers));
+    }
+
+    // Eligibility info is where users see their outcome — treat as assessment completion
+    if (currentStepId === "eligibility-info") {
+      const outcome = useAssessmentStore.getState().outcome;
+      if (outcome) {
+        trackAssessmentComplete(
+          outcome,
+          [...stepHistory, currentStepId],
+          sessionId,
+        );
+      }
     }
 
     if (isFirstStep) {
@@ -76,6 +103,11 @@ export function useAssessmentNav() {
 
   function goToPreviousStep() {
     if (!sessionId) return;
+
+    const toStep: StepId =
+      segments.length <= 1 ? FIRST_STEP : segments[segments.length - 2];
+    trackStepBack(currentStepId, toStep, sessionId);
+
     if (segments.length <= 1) {
       navigate(`/?session=${sessionId}`);
     } else {
@@ -84,6 +116,15 @@ export function useAssessmentNav() {
   }
 
   function handleStartOver() {
+    if (sessionId) {
+      const outcome = useAssessmentStore.getState().outcome;
+      if (currentStepId === "result" && outcome) {
+        trackAssessmentRestarted(outcome, sessionId);
+      } else {
+        trackAssessmentAbandoned(currentStepId, sessionId);
+      }
+    }
+
     const newId = generateSessionId();
     useAssessmentStore.getState().initSession(newId);
     navigate(`/?session=${newId}`);

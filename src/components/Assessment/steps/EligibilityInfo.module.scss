@@ -14,7 +14,8 @@
   gap: $gap-lg;
   text-align: center;
 
-  h5 {
+  h2 {
+    font-size: pxToRem(20);
     margin: 0;
 
     &:focus {

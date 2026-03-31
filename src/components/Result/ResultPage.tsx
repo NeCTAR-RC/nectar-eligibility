@@ -1,9 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Link } from "@ardc-ui/react";
 import { useAssessmentStore } from "../../store/assessmentStore";
 import { useAssessmentNav } from "../../store/useAssessmentNav";
 import { OUTCOME_ACTIONS } from "../../data/result/actions";
 import { downloadPdf } from "../../pdf/html2pdf/downloadPdf";
+import {
+  trackResultViewed,
+  trackPdfDownload,
+  trackCtaClick,
+} from "../../services/analytics";
 import PageShell from "../PageShell/PageShell";
 import AssessmentResult from "./AssessmentResult";
 import NextSteps from "./NextSteps";
@@ -14,22 +19,42 @@ import styles from "./ResultPage.module.scss";
 export default function ResultPage() {
   const outcome = useAssessmentStore((s) => s.outcome);
   const answers = useAssessmentStore((s) => s.answers);
-  const { stepHistory, handleStartOver } = useAssessmentNav();
+  const { sessionId, stepHistory, handleStartOver } = useAssessmentNav();
   const downloadBtnRef = useRef<HTMLButtonElement>(null);
   const startOverRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
+  const tracked = useRef(false);
+
+  useEffect(() => {
+    if (outcome && sessionId && !tracked.current) {
+      tracked.current = true;
+      trackResultViewed(outcome, sessionId);
+    }
+  }, [outcome, sessionId]);
 
   if (!outcome) return null;
 
   const actions = OUTCOME_ACTIONS[outcome];
 
   async function handleDownloadPdf() {
-    const elementsToHide = [downloadBtnRef.current, startOverRef.current].filter(Boolean) as HTMLElement[];
+    if (sessionId && outcome) {
+      trackPdfDownload(outcome, sessionId);
+    }
+    const elementsToHide = [
+      downloadBtnRef.current,
+      startOverRef.current,
+    ].filter(Boolean) as HTMLElement[];
     setDownloading(true);
     try {
       await downloadPdf(elementsToHide);
     } finally {
       setDownloading(false);
+    }
+  }
+
+  function handleCtaClick() {
+    if (sessionId && outcome) {
+      trackCtaClick(outcome, actions.primary.label, sessionId);
     }
   }
 
@@ -47,10 +72,7 @@ export default function ResultPage() {
         outcome={outcome}
       />
 
-      <nav
-        className={styles.actions}
-        aria-label="Result actions"
-      >
+      <nav className={styles.actions} aria-label="Result actions">
         <div className={styles.buttons}>
           <Button
             ref={downloadBtnRef}
@@ -60,7 +82,12 @@ export default function ResultPage() {
           >
             {downloading ? "Generating…" : "Download PDF"}
           </Button>
-          <Link href={actions.primary.href} target="_blank" variant="primary">
+          <Link
+            href={actions.primary.href}
+            target="_blank"
+            variant="primary"
+            onPress={handleCtaClick}
+          >
             {actions.primary.label}
           </Link>
         </div>

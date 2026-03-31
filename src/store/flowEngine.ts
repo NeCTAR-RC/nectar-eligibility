@@ -5,8 +5,7 @@ const SESSION_PARAM = "session";
 
 function hasRealFunding(answers: AssessmentAnswers): boolean {
   return (
-    answers.funding.length > 0 &&
-    !answers.funding.includes("none-of-the-above")
+    answers.funding.length > 0 && !answers.funding.includes("none-of-the-above")
   );
 }
 
@@ -51,7 +50,9 @@ export function resolveNextStep(
         : "eligibility-info";
 
     case "funding-source":
-      return hasRealFunding(answers) ? "eligibility-info" : "member-organisation";
+      return hasRealFunding(answers)
+        ? "eligibility-info"
+        : "member-organisation";
 
     case "member-organisation":
       return "eligibility-info";

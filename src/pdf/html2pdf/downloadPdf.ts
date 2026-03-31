@@ -4,40 +4,27 @@ import { extractPdfLinks, type PdfLinkInfo } from "./extractPdfLinks";
 import { fixBoxShadowBorders, hideInlineSvgIcons } from "./pdfDomTransforms";
 import { FLOW_VERSION } from "../../store/persistence";
 
-const A4_HEIGHT_MM = 297;
-const A4_WIDTH_MM = 210;
+const CONTENT_WIDTH_MM = 210;
 const CONTAINER_WIDTH_PX = 1200;
 
-/** A4 page height in pixels at the container width. */
-const PX_PAGE_HEIGHT = CONTAINER_WIDTH_PX * (A4_HEIGHT_MM / A4_WIDTH_MM);
-
-/** Elements matching this selector are prevented from splitting across pages. */
-const AVOID_SPLIT_SELECTOR = "footer[role='contentinfo']";
-
 /**
- * Generate and download a PDF of the current page.
+ * Generate and download a single-page PDF of `<main id="main-content">`.
  *
- * html2pdf's built-in pagebreaks plugin is disabled because it measures
- * the live DOM, which has the wrong width on mobile and zoomed viewports.
- * Page-break logic runs instead inside `onclone`, where html2canvas
- * renders into a 1200px-wide iframe with correct media queries.
- *
- * `windowHeight` is capped to one A4 page height so that
- * `parseDocumentSize` uses `body.scrollHeight` (actual content) rather
- * than the inflated `documentElement.clientHeight` from a zoomed-out
- * viewport.
- *
- * @param elementsToHide - DOM elements to temporarily hide during capture
- *   (e.g. buttons to start over or download PDF).
+ * The page width is A4 (210 mm) and the height is derived from the
+ * rendered canvas so the entire result fits on one page.
  */
 export async function downloadPdf(
   elementsToHide: HTMLElement[],
 ): Promise<void> {
   const { default: html2pdf } = await import("html2pdf.js");
 
+  const sourceElement = document.getElementById("main-content");
+  if (!sourceElement) return;
+
   elementsToHide.forEach((el) => (el.style.display = "none"));
 
   let collectedLinks: PdfLinkInfo[] = [];
+  let contentHeightMm = CONTENT_WIDTH_MM;
 
   try {
     const worker: Html2PdfWorker = html2pdf()
@@ -48,31 +35,57 @@ export async function downloadPdf(
           scale: 2,
           useCORS: true,
           windowWidth: CONTAINER_WIDTH_PX,
-          windowHeight: Math.round(PX_PAGE_HEIGHT),
           onclone: async (doc: Document) => {
             await prepareCloneForPdf(doc);
-            collectedLinks = extractPdfLinks(doc, A4_HEIGHT_MM);
+            collectedLinks = extractPdfLinks(doc);
           },
         },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        jsPDF: {
+          unit: "mm",
+          format: [CONTENT_WIDTH_MM, CONTENT_WIDTH_MM],
+          orientation: "portrait",
+        },
         enableLinks: false,
       })
       .set({ pagebreak: { mode: [] } })
-      .from(document.body)
+      .from(sourceElement)
       .toContainer()
       .then(function (this: Html2PdfWorker) {
         this.prop.container.style.width = CONTAINER_WIDTH_PX + "px";
       })
       .toCanvas()
+      .then(function (this: Html2PdfWorker) {
+        // Derive the page height from the actual rendered canvas so
+        // the PDF page exactly fits the content. Both pageSize and
+        // opt.jsPDF.format must be patched — pageSize controls the
+        // page-split ratio, opt.jsPDF.format controls the jsPDF
+        // instance created in toPdf().
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const prop = this.prop as any;
+        const canvas = prop.canvas as HTMLCanvasElement;
+        const scale = canvas.width / CONTAINER_WIDTH_PX;
+        contentHeightMm =
+          (canvas.height / scale) * (CONTENT_WIDTH_MM / CONTAINER_WIDTH_PX);
+
+        const ps = prop.pageSize;
+        ps.height = contentHeightMm;
+        ps.inner.height = contentHeightMm;
+        ps.inner.ratio = contentHeightMm / CONTENT_WIDTH_MM;
+        this.opt.jsPDF!.format = [CONTENT_WIDTH_MM, contentHeightMm];
+      })
       .toPdf()
       .get("pdf", (pdf) => {
+        // Rounding in toPdf can spill an empty sliver onto page 2.
+        while (pdf.internal.getNumberOfPages() > 1) {
+          pdf.deletePage(pdf.internal.getNumberOfPages());
+        }
+
         collectedLinks.forEach((link) => {
           pdf.setPage(link.page);
           pdf.link(link.x, link.y, link.width, link.height, {
             url: link.url,
           });
         });
-        pdf.setPage(pdf.internal.getNumberOfPages());
       });
 
     await worker.save();
@@ -83,7 +96,6 @@ export async function downloadPdf(
 
 // ── Private helpers ──────────────────────────────────────────────────────────
 
-/** Build a filename like `nectar-eligibility-v1-20260325-1430.pdf`. */
 function buildPdfFilename(): string {
   const now = new Date();
   const date = now.toISOString().slice(0, 10).replace(/-/g, "");
@@ -94,65 +106,14 @@ function buildPdfFilename(): string {
   return `nectar-eligibility-v${FLOW_VERSION}-${date}-${time}.pdf`;
 }
 
-/**
- * Prepare the html2canvas-cloned document for PDF rendering.
- *
- * Runs inside the 1200px-wide iframe clone where media queries match
- * the PDF layout. Canvas height (`body.scrollHeight`) is measured AFTER
- * `onclone` returns, so DOM changes here (spacers, style overrides) are
- * reflected in the final canvas.
- *
- * Resets `min-height: 100vh` on `#root` because the app uses it to fill
- * the viewport. Inside a tall iframe (e.g. zoomed-out browser), this
- * inflates the flex column layout and pushes the footer far below the
- * content.
- */
+/** Apply DOM fixes to the html2canvas clone before rendering. */
 async function prepareCloneForPdf(doc: Document): Promise<void> {
+  // Reset min-height: 100vh on #root so the flex layout doesn't
+  // inflate the canvas beyond the actual content height.
   const root = doc.getElementById("root");
   if (root) root.style.minHeight = "auto";
 
-  avoidSplitAcrossPages(doc);
   await convertSvgImagesToPng(doc);
   hideInlineSvgIcons(doc);
   fixBoxShadowBorders(doc);
-}
-
-/**
- * Prevent selected elements from being split across PDF pages.
- *
- * If an element would span a page boundary and fits within a single
- * page, a spacer div is inserted before it to push it to the next page.
- */
-function avoidSplitAcrossPages(doc: Document): void {
-  doc.querySelectorAll<HTMLElement>(AVOID_SPLIT_SELECTOR).forEach((el) => {
-    const offsetTop = getDocumentOffsetTop(el, doc.body);
-    const elHeight = el.offsetHeight;
-    const startPage = Math.floor(offsetTop / PX_PAGE_HEIGHT);
-    const endPage = Math.floor((offsetTop + elHeight) / PX_PAGE_HEIGHT);
-
-    if (endPage !== startPage && elHeight <= PX_PAGE_HEIGHT) {
-      const spacerHeight = PX_PAGE_HEIGHT - (offsetTop % PX_PAGE_HEIGHT);
-      const spacer = doc.createElement("div");
-      spacer.style.height = spacerHeight + "px";
-      el.parentNode?.insertBefore(spacer, el);
-    }
-  });
-}
-
-/**
- * Calculate an element's top offset relative to a boundary ancestor
- * by walking the offsetParent chain. Unlike `getBoundingClientRect`,
- * this is not affected by scroll position or viewport offset.
- */
-function getDocumentOffsetTop(
-  el: HTMLElement,
-  boundary: HTMLElement,
-): number {
-  let top = 0;
-  let node: HTMLElement | null = el;
-  while (node && node !== boundary) {
-    top += node.offsetTop;
-    node = node.offsetParent as HTMLElement | null;
-  }
-  return top;
 }

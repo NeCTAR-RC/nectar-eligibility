@@ -6,6 +6,7 @@ import {
   checkFunding,
   checkAcknowledge,
   expectHeading,
+  completeNationalPath,
 } from "./helpers";
 
 test.describe("National allocation via Australian affiliation", () => {
@@ -90,6 +91,22 @@ test.describe("National allocation via Auckland affiliation", () => {
     await checkAcknowledge(page);
     await clickContinue(page);
     await expectHeading(page, "Assessment Complete");
+  });
+});
+
+test.describe("PDF download", () => {
+  test("downloads a PDF from the result page", async ({ page }) => {
+    await page.goto("/");
+    await completeNationalPath(page, "Researcher");
+    await expectHeading(page, "Assessment Complete");
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Download PDF" }).click();
+    const download = await downloadPromise;
+
+    expect(download.suggestedFilename()).toMatch(
+      /^nectar-eligibility-v\d+-\d{8}-\d{6}\.pdf$/,
+    );
   });
 });
 
