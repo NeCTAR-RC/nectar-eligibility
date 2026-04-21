@@ -43,6 +43,14 @@ React 19 + TypeScript, React Router (BrowserRouter), Zustand 5 + Immer, @ardc-ui
 - **CheckboxGroupItem**: use `page.locator("main").getByText(label)` — scope to main to avoid footer matches
 - **Regular Button** (@ardc-ui/react): `getByRole("button")` works fine
 
+## Analytics (React Aria Link tracking gotcha)
+
+GA4 Enhanced Measurement "Outbound clicks" does **not** fire for `@ardc-ui/react` `<Link>` anchors. The wrapped `react-aria-components` Link uses `usePress`, which stops click-event propagation — GA4's document-level listener never sees the click (verified via isolation test in 2026-04). Documented, intentional React Aria behaviour, not a bug in our code.
+
+**House rule**: any `<Link>` whose click you need to track must have an explicit `onPress` that calls the relevant `track*` function from `src/services/analytics.ts`. Do NOT rely on auto outbound-click tracking.
+
+See the README "Outbound clicks caveat" section for details. Reference implementations: [`src/components/Result/ResultPage.tsx`](src/components/Result/ResultPage.tsx) (Apply CTA) and [`src/components/Result/EligibleServices.tsx`](src/components/Result/EligibleServices.tsx) (service links, each uses a stable `service.id` as `cta_label` rather than the display name).
+
 ## Commands
 ```bash
 pnpm dev              # Dev server (localhost:5173)

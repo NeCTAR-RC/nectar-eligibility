@@ -65,7 +65,7 @@ export default function ResultPage() {
     >
       <AssessmentResult outcome={outcome} />
       <NextSteps outcome={outcome} />
-      <EligibleServices outcome={outcome} />
+      <EligibleServices outcome={outcome} sessionId={sessionId} />
       <AssessmentPath
         stepHistory={stepHistory}
         answers={answers}

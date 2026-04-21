@@ -260,6 +260,8 @@ Three-tier gap system for flex/grid layouts — deeper nesting uses tighter gaps
 
 The application uses [Google Analytics 4](https://analytics.google.com/) via the [`react-ga4`](https://www.npmjs.com/package/react-ga4) library to track user behaviour through the assessment flow. Analytics are entirely client-side — no backend required.
 
+For GA4 dashboard setup instructions and reporting options, see [`ga4-dashboards.md`](ga4-dashboards.md).
+
 ### GA4 Properties
 
 | Environment | Property name                   |
@@ -346,12 +348,16 @@ With Enhanced Measurement enabled (configured on both properties), GA4 automatic
 
 - **Page views** — tracks each step URL change, useful for funnel analysis
 - **Scrolls** — 90% scroll depth
-- **Outbound clicks** — clicks to external links (Apply, Explore, service links)
 - **User location** — approximate geo from IP (country/city level)
 - **Device and browser** — device category (mobile/tablet/desktop), OS, browser
 - **Unique users** — via GA4's built-in `client_id` cookie
 
 These require no code — they work out of the box.
+
+> **Outbound clicks caveat — React Aria `Link` does not fire GA4's auto `click` event.**
+> GA4's Enhanced Measurement "Outbound clicks" feature attaches a document-level click listener to detect anchor clicks going off-site. `@ardc-ui/react`'s `<Link>` wraps `react-aria-components`' Link, which uses the `usePress` hook — `usePress` intentionally **stops click-event propagation**, so GA4's listener never sees the click (verified via isolation test: a plain `<a>` on the same page fires `click` in DebugView; the `@ardc-ui/react` Link does not).
+> This is a documented, intentional behaviour in React Aria (see [adobe/react-spectrum#2100](https://github.com/adobe/react-spectrum/issues/2100)), not a bug in our code.
+> **House rule for this app**: any outbound link you want tracked **must be instrumented explicitly** with an `onPress` handler on the `<Link>` that calls the relevant `track*` function from `services/analytics.ts`. Do not rely on auto outbound-click tracking for `<Link>` anchors. Example in [`src/components/Result/EligibleServices.tsx`](src/components/Result/EligibleServices.tsx) (service links) and [`src/components/Result/ResultPage.tsx`](src/components/Result/ResultPage.tsx) (Apply CTA).
 
 ### Handling repeat users
 
@@ -376,7 +382,8 @@ src/
 │   └── useHydration.ts      # Fires: session_restored, session_expired
 └── components/
     └── Result/
-        └── ResultPage.tsx   # Fires: result_viewed, pdf_download, cta_click
+        ├── ResultPage.tsx        # Fires: result_viewed, pdf_download, cta_click (Apply button)
+        └── EligibleServices.tsx  # Fires: cta_click (each service link, cta_label = service.id)
 ```
 
 All event functions are defined in `analytics.ts` and imported where needed. If `VITE_GA_MEASUREMENT_ID` is not set, `initializeAnalytics()` returns early and all tracking functions silently no-op.
