@@ -26,20 +26,20 @@ Step-by-step instructions for creating analytics dashboards in both GA4 properti
 
 ### PRD Success Metrics — What the Dashboards Must Cover
 
-| # | PRD Goal | GA4 Coverage |
-|---|----------|-------------|
-| 3 | Engagement Score > 60% in first 12 months | Built-in Engagement Rate (no custom dashboard) |
-| 4 | Referral traffic from allocation request form | [Referral Traffic](#referral-traffic) |
-| 6 | Click-through rate on service recommendations | [Link Tracking & Service Click-through](#link-tracking--service-click-through) |
+| #   | PRD Goal                                      | GA4 Coverage                                                                   |
+| --- | --------------------------------------------- | ------------------------------------------------------------------------------ |
+| 3   | Engagement Score > 60% in first 12 months     | Built-in Engagement Rate (no custom dashboard)                                 |
+| 4   | Referral traffic from allocation request form | [Referral Traffic](#referral-traffic)                                          |
+| 6   | Click-through rate on service recommendations | [Link Tracking & Service Click-through](#link-tracking--service-click-through) |
 
 PRD Goals #1, #2, #5, #7, #8 are measured externally (Freshdesk, allocation system, Grafana, WAVE/Lighthouse) — not in GA4.
 
 ### Two Types of Sessions
 
-| Concept | Source | What it means |
-|---------|--------|---------------|
-| **GA4 session** | GA4's built-in `session_id` (cookie-based) | A browser visit. Expires after 30 min inactivity. One GA4 session can contain multiple assessment runs if the user clicks "Start Over". |
-| **App session** (`session_id` event parameter) | App's localStorage, incremental per assessment run | One assessment attempt. Each "Start Over" creates a new app `session_id`. A single GA4 session can have multiple app sessions. |
+| Concept                                        | Source                                             | What it means                                                                                                                           |
+| ---------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **GA4 session**                                | GA4's built-in `session_id` (cookie-based)         | A browser visit. Expires after 30 min inactivity. One GA4 session can contain multiple assessment runs if the user clicks "Start Over". |
+| **App session** (`session_id` event parameter) | App's localStorage, incremental per assessment run | One assessment attempt. Each "Start Over" creates a new app `session_id`. A single GA4 session can have multiple app sessions.          |
 
 When counting "how many assessments were completed", use **Event count for `assessment_complete`** (one per app session), not GA4's Sessions metric. When counting "how many unique people used the tool", use **Active Users** (GA4's deduplicated user count).
 
@@ -72,17 +72,17 @@ Do this **once per property** (Non-Prod and Production). Dashboards will not sho
 
 `Admin > Data display > Custom definitions > Custom dimensions > Create custom dimension`
 
-| Dimension name | Scope | Event parameter |
-|---|---|---|
-| Step ID | Event | `step_id` |
-| Answer Value | Event | `answer_value` |
-| Outcome | Event | `outcome` |
-| Assessment Path | Event | `path` |
-| Last Step | Event | `last_step` |
-| From Step | Event | `from_step` |
-| To Step | Event | `to_step` |
-| CTA Label | Event | `cta_label` |
-| Is Repeat | Event | `is_repeat` |
+| Dimension name    | Scope | Event parameter     |
+| ----------------- | ----- | ------------------- |
+| Step ID           | Event | `step_id`           |
+| Answer Value      | Event | `answer_value`      |
+| Outcome           | Event | `outcome`           |
+| Assessment Path   | Event | `path`              |
+| Last Step         | Event | `last_step`         |
+| From Step         | Event | `from_step`         |
+| To Step           | Event | `to_step`           |
+| CTA Label         | Event | `cta_label`         |
+| Is Repeat         | Event | `is_repeat`         |
 | Is First Download | Event | `is_first_download` |
 
 Note: `session_id` is intentionally not registered as a custom dimension due to high cardinality. GA4's built-in session tracking handles session grouping.
@@ -91,10 +91,10 @@ Note: `session_id` is intentionally not registered as a custom dimension due to 
 
 `Admin > Data display > Custom definitions > Custom metrics > Create custom metric`
 
-| Metric name | Scope | Event parameter | Unit |
-|---|---|---|---|
-| Duration Seconds | Event | `duration_seconds` | Seconds |
-| Question Number | Event | `question_number` | Standard |
+| Metric name      | Scope | Event parameter    | Unit     |
+| ---------------- | ----- | ------------------ | -------- |
+| Duration Seconds | Event | `duration_seconds` | Seconds  |
+| Question Number  | Event | `question_number`  | Standard |
 
 ### 3. Mark Key Event
 
@@ -128,22 +128,22 @@ This is critical for Explore reports, which only access data within the retentio
 
 **5 funnel steps (applies to all tabs):**
 
-| # | Name | Event | Parameter filter |
-|---|------|-------|-----------|
-| 1 | Visited | `session_start` | — |
-| 2 | Answered at least one question | `step_completed` | — |
-| 3 | Assessment completed | `assessment_complete` | — |
-| 4 | Viewed Result | `result_viewed` | — |
-| 5 | (per tab — see below) | (per tab) | (per tab) |
+| #   | Name                           | Event                 | Parameter filter |
+| --- | ------------------------------ | --------------------- | ---------------- |
+| 1   | Visited                        | `session_start`       | —                |
+| 2   | Answered at least one question | `step_completed`      | —                |
+| 3   | Assessment completed           | `assessment_complete` | —                |
+| 4   | Viewed Result                  | `result_viewed`       | —                |
+| 5   | (per tab — see below)          | (per tab)             | (per tab)        |
 
 Use sequencing **"is indirectly followed by"** on every step (plain `session_start → step_completed` sequence has page_views etc. in between, so indirect is required).
 
 **Tabs in the exploration:**
 
-| Tab | Step 5 event | Step 5 parameter filter |
-|---|---|---|
-| `Downloaded PDF` | `pdf_download` | — |
-| `Applied` | `cta_click` | — |
+| Tab              | Step 5 event   | Step 5 parameter filter |
+| ---------------- | -------------- | ----------------------- |
+| `Downloaded PDF` | `pdf_download` | —                       |
+| `Applied`        | `cta_click`    | —                       |
 
 ---
 
@@ -151,13 +151,13 @@ Use sequencing **"is indirectly followed by"** on every step (plain `session_sta
 
 **GA4 feature**: Explore > Free-form exploration. **Name**: `Outcome & Duration Analysis`. Variables: dimensions `Outcome`, `Is Repeat`, `Date`, `Assessment Path`; metrics `Event count`, `Active users`, `Duration Seconds`. Filter is per-tab: every tab needs `Event name` exactly matches `assessment_complete` set individually.
 
-| Tab | Viz | Rows / Breakdowns | Columns | Values |
-|-----|-----|------|---------|--------|
-| Outcome Distribution | Donut | Outcome (→ BREAKDOWNS) | — | Event count |
-| Outcome Trends | Line | — (Date = X axis, auto) | Outcome (→ BREAKDOWNS) | Event count |
-| First Time VS Repeat | Table | Outcome | Is Repeat | Event count, Active users |
-| Duration by Outcome | Table | Outcome | — | Duration Seconds, Event count |
-| Duration by Path | Table | Assessment Path | — | Duration Seconds, Event count |
+| Tab                  | Viz   | Rows / Breakdowns       | Columns                | Values                        |
+| -------------------- | ----- | ----------------------- | ---------------------- | ----------------------------- |
+| Outcome Distribution | Donut | Outcome (→ BREAKDOWNS)  | —                      | Event count                   |
+| Outcome Trends       | Line  | — (Date = X axis, auto) | Outcome (→ BREAKDOWNS) | Event count                   |
+| First Time VS Repeat | Table | Outcome                 | Is Repeat              | Event count, Active users     |
+| Duration by Outcome  | Table | Outcome                 | —                      | Duration Seconds, Event count |
+| Duration by Path     | Table | Assessment Path         | —                      | Duration Seconds, Event count |
 
 **Duration metric**: GA4 event-scoped custom metrics default to SUM. Register a Calculated Metric `Avg Duration Seconds` (Admin > Custom definitions > Calculated metrics; formula `{Duration Seconds}/{Event count}`, unit Seconds), then use it in Duration by Outcome and Duration by Path tabs. It can take a few hours to appear in the Explore metric picker after registration.
 
@@ -169,15 +169,15 @@ Use sequencing **"is indirectly followed by"** on every step (plain `session_sta
 
 All tabs 1–6 use: Breakdowns = Answer Value, Values = Event count, Filter = `event_name` exactly matches `step_completed` + `step_id` condition.
 
-| Tab | step_id filter | Visualisation | Notes |
-|-----|----------------|---------------|-------|
-| Professional Role | `professional-role` | Bar | — |
-| AU Affiliation | `australian-affiliation` | Donut | yes/no |
-| Auckland Affiliation | `auckland-affiliation` | Donut | yes/no |
-| Funding Sources | `funding-source` | Bar | `answer_value` is comma-separated; each combo is a distinct value |
-| Member Organisation | `member-organisation` | Donut | yes/no |
-| Selected Organisation | `member-organisation` | Table | Add filter `answer_value` begins with `yes,` — format is `yes, [org-name]` |
-| Full Paths | _(no step_id filter)_ | Table | Rows = Assessment Path, filter `event_name` = `assessment_complete` |
+| Tab                   | step_id filter           | Visualisation | Notes                                                                      |
+| --------------------- | ------------------------ | ------------- | -------------------------------------------------------------------------- |
+| Professional Role     | `professional-role`      | Bar           | —                                                                          |
+| AU Affiliation        | `australian-affiliation` | Donut         | yes/no                                                                     |
+| Auckland Affiliation  | `auckland-affiliation`   | Donut         | yes/no                                                                     |
+| Funding Sources       | `funding-source`         | Bar           | `answer_value` is comma-separated; each combo is a distinct value          |
+| Member Organisation   | `member-organisation`    | Donut         | yes/no                                                                     |
+| Selected Organisation | `member-organisation`    | Table         | Add filter `answer_value` begins with `yes,` — format is `yes, [org-name]` |
+| Full Paths            | _(no step_id filter)_    | Table         | Rows = Assessment Path, filter `event_name` = `assessment_complete`        |
 
 ---
 
@@ -185,10 +185,10 @@ All tabs 1–6 use: Breakdowns = Answer Value, Values = Event count, Filter = `e
 
 **GA4 feature**: Explore > Free-form exploration. **Name**: `Post-Result Engagement`. Variables: dimensions `Event name`, `Outcome`, `Last Step`; metric `Event count`.
 
-| Tab | Viz | Breakdowns | Values | Filter |
-|---|-----|-----------|--------|--------|
-| Restarts by Outcome | Bar | Outcome | Event count | `Event name` exactly matches `assessment_restarted` |
-| Abandonment by Step | Bar | Last Step | Event count | `Event name` exactly matches `assessment_abandoned` |
+| Tab                 | Viz | Breakdowns | Values      | Filter                                              |
+| ------------------- | --- | ---------- | ----------- | --------------------------------------------------- |
+| Restarts by Outcome | Bar | Outcome    | Event count | `Event name` exactly matches `assessment_restarted` |
+| Abandonment by Step | Bar | Last Step  | Event count | `Event name` exactly matches `assessment_abandoned` |
 
 ---
 
@@ -207,10 +207,10 @@ All tabs 1–6 use: Breakdowns = Answer Value, Values = Event count, Filter = `e
 
 **GA4 feature**: Explore > Free-form exploration. **Name**: `Session Health`. Confirms the localStorage session-resume feature works in the wild.
 
-| Tab | Config |
-|-----|--------|
-| Session Events | Table: Rows = Event name (`session_restored`, `session_expired`). Values = Event count. |
-| Session Trend | Line: Date × Event count for `session_restored`. |
+| Tab                       | Config                                                                                                   |
+| ------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Session Events            | Table: Rows = Event name (`session_restored`, `session_expired`). Values = Event count.                  |
+| Session Trend             | Line: Date × Event count for `session_restored`.                                                         |
 | GA Session vs App Session | Table: Active Users, Sessions, Event count for `assessment_complete`. Ratio reveals runs-per-GA-session. |
 
 Plus `Reports > Tech > Tech details` for device/browser/OS breakdown — built-in, no config needed.
@@ -228,14 +228,14 @@ Two custom reports live in `Reports > Library` (built identically in both proper
 - **Hero scorecards**: `Active users`, `Key events`, `Engagement rate`, `Duration Seconds`
 - **Cards** (6):
 
-| Card | Metric | Dimension |
-|------|--------|-----------|
-| Active users by Country | Active users | Country |
-| Active users by Device category | Active users | Device category |
-| Active users by Browser | Active users | Browser |
-| Event count by Event name | Event count | Event name |
-| New vs. Returning users | Active users / Event count / Key events / Total revenue (tabs) | Date trend |
-| Overview hero card | Active users / Event count / Key events / Total revenue (tabs) | — |
+| Card                            | Metric                                                         | Dimension       |
+| ------------------------------- | -------------------------------------------------------------- | --------------- |
+| Active users by Country         | Active users                                                   | Country         |
+| Active users by Device category | Active users                                                   | Device category |
+| Active users by Browser         | Active users                                                   | Browser         |
+| Event count by Event name       | Event count                                                    | Event name      |
+| New vs. Returning users         | Active users / Event count / Key events / Total revenue (tabs) | Date trend      |
+| Overview hero card              | Active users / Event count / Key events / Total revenue (tabs) | —               |
 
 #### Nectar Eligibility - Detailed Report
 
@@ -268,12 +268,12 @@ Both reports sit in the Library without being published to a collection — reac
 
 All 4 tabs filter `Event name` exactly matches `cta_click`:
 
-| Tab | Viz | Breakdowns | Values |
-|-----|-----|-----------|--------|
-| CTA Clicks by Label | Bar | CTA Label | Event count |
-| CTA Clicks by Outcome | Bar | Outcome | Event count |
-| CTA Trend by Label | Line | CTA Label | Event count |
-| CTA Trend | Line | — | Event count |
+| Tab                   | Viz  | Breakdowns | Values      |
+| --------------------- | ---- | ---------- | ----------- |
+| CTA Clicks by Label   | Bar  | CTA Label  | Event count |
+| CTA Clicks by Outcome | Bar  | Outcome    | Event count |
+| CTA Trend by Label    | Line | CTA Label  | Event count |
+| CTA Trend             | Line | —          | Event count |
 
 **`cta_click` comes from app code.** Every tracked CTA has explicit `onPress` firing `trackCtaClick(outcome, ctaLabel, sessionId)` from [src/services/analytics.ts](src/services/analytics.ts). GA4's auto outbound-click does not fire for `@ardc-ui/react` `<Link>` anchors (`react-aria-components` `usePress` stops event propagation), so auto click tracking is not used — see [README.md](README.md) for the house rule.
 
@@ -285,11 +285,11 @@ For the PRD's 6-monthly review: extract CTA counts from "CTA Clicks by Label". C
 
 Three user-scoped outcome segments live inside the Funnel Exploration (scoped to that exploration; not promoted to property):
 
-| Segment | Scope | Condition |
-|---|---|---|
-| National Outcome | User | `event_name = assessment_complete AND outcome = national` |
-| Local Outcome | User | `event_name = assessment_complete AND outcome = local` |
-| Ineligible Outcome | User | `event_name = assessment_complete AND outcome = not-eligible` |
+| Segment            | Scope | Condition                                                     |
+| ------------------ | ----- | ------------------------------------------------------------- |
+| National Outcome   | User  | `event_name = assessment_complete AND outcome = national`     |
+| Local Outcome      | User  | `event_name = assessment_complete AND outcome = local`        |
+| Ineligible Outcome | User  | `event_name = assessment_complete AND outcome = not-eligible` |
 
 If a future exploration needs them, open the segment chip in the Funnel Exploration and click **"Save to property"**. Ad-hoc segments (e.g. First-time Completions) can be defined inside an exploration in ~30 seconds — no need to pre-build.
 

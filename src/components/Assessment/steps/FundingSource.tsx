@@ -5,6 +5,7 @@ import {
   FUNDING_SOURCE_QUESTION,
   FUNDING_OPTIONS,
 } from "../../../data/assessment/fundingSource";
+import { FUNDING_SOURCE_DESCRIPTION } from "../../../data/assessment/fundingSourceDescription";
 import ContentSection from "../../ContentSection/ContentSection";
 
 interface Props {
@@ -36,7 +37,7 @@ export default function FundingSource({ headingRef }: Props) {
   return (
     <ContentSection
       title={FUNDING_SOURCE_QUESTION}
-      description="Check all that apply."
+      description={FUNDING_SOURCE_DESCRIPTION}
       headingRef={headingRef}
     >
       <CheckboxGroup

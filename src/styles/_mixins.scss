@@ -1,9 +1,4 @@
 @use "sass:map";
-@use "sass:math";
-
-@function pxToRem($px) {
-  @return math.div($px, 16) * 1rem;
-}
 
 $breakpoints: (
   sm: 576px,
@@ -11,12 +6,6 @@ $breakpoints: (
   lg: 992px,
   xl: 1200px,
 );
-
-// Content spacing hierarchy — deeper nesting uses tighter gaps
-$gap-sm: pxToRem(8); // tightest: heading+description, grouped fields
-$gap-md: pxToRem(16); // section children, form fields
-$gap-lg: pxToRem(24); // card-level sections, major visual breaks
-$gap-xl: pxToRem(32); // footer rows, large section separators
 
 $container-max-width: 1140px;
 $container-padding: 1rem;

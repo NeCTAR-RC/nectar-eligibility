@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
 
           <div className={styles.newsletterColumn}>
-            <h4 className={styles.heading}>ARDC Connect Newsletter</h4>
+            <h2 className={styles.heading}>ARDC Connect Newsletter</h2>
             <p>
               Subscribe to the ARDC Connect Newsletter to keep up-to-date with
               the latest digital research news, events, resources, career
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <nav className={styles.linksColumn} aria-label="Footer links">
-            <h4 className={styles.heading}>Quick Links</h4>
+            <h2 className={styles.heading}>Quick Links</h2>
             <ul className={styles.linkList}>
               <li>
                 <a href="/">Home</a>
@@ -121,8 +121,8 @@ export default function Footer() {
         <div className={styles.acknowledgement}>
           <p>
             We acknowledge and celebrate the First Australians on whose
-            traditional lands we live and work, and we pay our respects to
-            Elders past, present and emerging.
+            traditional lands we live and work, and we pay our respects to their
+            Elders past and present.
           </p>
         </div>
       </div>

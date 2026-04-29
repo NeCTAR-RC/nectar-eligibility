@@ -1,22 +1,23 @@
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 .footer {
   display: flex;
   flex-direction: column;
-  color: $color-gray-900;
+  color: $neutral-gray-900;
   break-inside: avoid;
 }
 
 // Row 1: Logos, newsletter, links
 .main-row {
-  padding-block: $gap-xl;
+  padding-block: $spacing-8;
 }
 
 .main-grid {
   @include container;
   display: grid;
-  gap: $gap-xl;
+  gap: $spacing-8;
 
   @include respond-to(md) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -31,13 +32,13 @@
 .logo-column {
   display: flex;
   flex-direction: column;
-  gap: $gap-md;
+  gap: $spacing-4;
 }
 
 .logos {
   display: flex;
   align-items: flex-end;
-  gap: pxToRem(10);
+  gap: $spacing-2;
 }
 
 .logos img {
@@ -56,7 +57,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: $gap-md;
+  gap: $spacing-4;
 }
 
 .heading {
@@ -70,43 +71,43 @@
 .links-column {
   display: flex;
   flex-direction: column;
-  gap: $gap-md;
+  gap: $spacing-4;
 }
 
 .link-list {
   display: flex;
   flex-direction: column;
-  gap: $gap-sm;
+  gap: $spacing-2;
   list-style: none;
   padding-left: 0;
 
   a {
-    color: $color-primary;
+    color: $brand-purple-500;
     text-decoration: underline;
 
     &:hover,
     &:focus {
-      color: $color-gray-900;
-      text-decoration-color: $ardc-blue;
+      color: $neutral-gray-900;
+      text-decoration-color: $brand-blue-500;
     }
   }
 }
 
 // Row 2: Acknowledgement
 .acknowledgement-row {
-  background-color: $color-gray-100;
+  background-color: $neutral-gray-100;
 }
 
 .acknowledgement {
   @include container;
-  padding-block: pxToRem(17);
-  color: $color-gray-600;
+  padding-block: $spacing-4;
+  color: $neutral-gray-700;
   font-size: pxToRem(16);
 }
 
 // Row 3: Copyright
 .copyright-row {
-  border-top: 1px solid $color-gray-200;
+  border-top: 1px solid $neutral-gray-100;
 }
 
 .copyright-bar {
@@ -114,44 +115,44 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-block: pxToRem(20);
+  padding-block: $spacing-5;
   font-size: pxToRem(13);
   font-weight: $font-weight-normal;
   line-height: 1.1;
-  color: rgba($color-gray-900, 0.8);
+  color: rgba($neutral-gray-900, 0.8);
 
   @include respond-below(md) {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: pxToRem(8);
+    gap: $spacing-2;
   }
 }
 
 .copyright-text {
-  margin-right: pxToRem(19);
+  margin-right: $spacing-5;
 
   @include respond-below(lg) {
-    margin-right: pxToRem(10);
+    margin-right: $spacing-2;
   }
 }
 
 .copyright-bar a {
-  color: rgba($color-gray-900, 0.8);
+  color: rgba($neutral-gray-900, 0.8);
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: $ardc-purple;
+    color: $brand-purple-500;
   }
 }
 
 .footer-link {
-  border-left: 1px solid rgba($color-gray-900, 0.8);
-  padding-inline: pxToRem(19);
+  border-left: 1px solid rgba($neutral-gray-900, 0.8);
+  padding-inline: $spacing-5;
 
   @include respond-below(lg) {
-    padding-inline: pxToRem(10);
+    padding-inline: $spacing-2;
   }
 
   @include respond-below(md) {

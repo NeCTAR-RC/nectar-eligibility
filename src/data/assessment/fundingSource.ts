@@ -11,7 +11,7 @@ export const FUNDING_OPTIONS: { value: FundingSource; label: string }[] = [
   {
     value: "ncris",
     label:
-      "A National Collaborative Research Infrastructure Strategy (NCRIS) capability",
+      "A National Collaborative Research Infrastructure Strategy (NCRIS) capability (e.g. ARDC)",
   },
   {
     value: "government-grant",

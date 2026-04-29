@@ -45,7 +45,7 @@ START
   │    "Are you (or your collaborators) funded by:"
   │    Options (multi-select):
   │      - A national or international research grant
-  │      - A National Collaborative Research Infrastructure Strategy (NCRIS) capability
+  │      - A National Collaborative Research Infrastructure Strategy (NCRIS) capability (e.g. ARDC)
   │      - A federal or state government department grant
   │      - A grant from industry supporting research
   │      - None of the above
@@ -71,7 +71,7 @@ START
 - Professional Role: Researcher
 - Australian Affiliation: No
 - Auckland Affiliation: Yes (University of Auckland)
-- Funding Source: A National Collaborative Research Infrastructure Strategy (NCRIS) capability
+- Funding Source: A National Collaborative Research Infrastructure Strategy (NCRIS) capability (e.g. ARDC)
 - **Result: National Allocation** — Eligible to apply for a national project allocation
 
 ### Example 3: Local Allocation Path (Australian, no funding, member org)
@@ -121,22 +121,28 @@ START
 ### For National or Local Allocation:
 1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
 2. Follow Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
-3. ORCID account connected to Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000277260
-4. Agree to terms of service — https://dashboard.rc.nectar.org.au/terms/
+3. ORCID account linked to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
+4. Agree to the terms of the service.
 
 ### For Not Eligible (project trial or ARDC services):
 1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
-2. Agree to relevant terms of service:
-   - Nectar Research Cloud and JupyterHub — https://dashboard.rc.nectar.org.au/terms/
-   - Virtual Desktop — https://desktop.rc.nectar.org.au/terms/
-   - BinderHub — https://support.ehelp.edu.au/support/solutions/articles/6000264502
+2. Agree to the terms of the service.
 
 ## ARDC Nectar Services
 
-1. **ARDC Virtual Desktop Service** — Your extra computer in the cloud — https://desktop.rc.nectar.org.au/
-2. **ARDC Jupyter Notebook Service** — Develop code and computational output — https://jupyterhub.rc.nectar.org.au
-3. **ARDC BinderHub Service** — Make code repositories shareable, executable and reproducible — https://binderhub.rc.nectar.org.au/
-4. **Nectar Dashboard** — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
+For eligible users (national or local allocation):
+
+1. **Nectar Dashboard** — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
+2. **Virtual Desktop Service** — Your extra computer in the cloud — https://desktop.rc.nectar.org.au/
+3. **Jupyter Notebook Service** — Develop code and computational output — https://jupyterhub.rc.nectar.org.au
+4. **BinderHub Service** — Make code repositories shareable, executable and reproducible — https://binderhub.rc.nectar.org.au/
+
+For users who are not eligible for an allocation, the following ARDC services remain available (Nectar Dashboard is offered as a project trial only):
+
+1. **Virtual Desktop Service** — https://desktop.rc.nectar.org.au/
+2. **Jupyter Notebook Service** — https://jupyterhub.rc.nectar.org.au
+3. **BinderHub Service** — https://binderhub.rc.nectar.org.au/
+4. **Nectar Dashboard (Project Trial)** — https://dashboard.rc.nectar.org.au/
 
 ## ARDC Nectar Member Organisations (by Node)
 

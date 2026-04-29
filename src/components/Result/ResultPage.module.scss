@@ -1,11 +1,12 @@
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 @use "utilities" as *;
 
 .disclaimer {
-  background-color: rgba($ardc-blue, 0.1);
-  border: 1px solid $ardc-blue;
-  padding: pxToRem(12) pxToRem(16);
+  background-color: rgba($brand-blue-500, 0.1);
+  border: 1px solid $brand-blue-500;
+  padding: $spacing-3 $spacing-4;
   font-size: $font-size-sm;
 }
 

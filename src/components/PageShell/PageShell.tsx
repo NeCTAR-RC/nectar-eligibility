@@ -22,9 +22,7 @@ export default function PageShell({
         </h1>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
       </header>
-      <div className={styles.body}>
-        <div className={styles.card}>{children}</div>
-      </div>
+      <div className={styles.card}>{children}</div>
     </div>
   );
 }

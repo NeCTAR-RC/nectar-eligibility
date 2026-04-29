@@ -17,7 +17,7 @@ export async function clickPrevious(page: Page) {
 }
 
 export async function checkFunding(page: Page, label: string | RegExp) {
-  await page.locator("main").getByText(label).click();
+  await page.getByRole("group").getByText(label).click();
 }
 
 export async function checkAcknowledge(page: Page) {

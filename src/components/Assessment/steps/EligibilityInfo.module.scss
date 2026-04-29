@@ -1,17 +1,18 @@
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 .info {
   display: flex;
   flex-direction: column;
-  gap: $gap-md;
+  gap: $spacing-4;
 }
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $gap-lg;
+  gap: $spacing-6;
   text-align: center;
 
   h2 {
@@ -30,21 +31,21 @@
 }
 
 .icon-success {
-  color: $color-success;
+  color: $secondary-green-500;
 }
 
 .icon-danger {
-  color: $color-danger;
+  color: $system-red-500;
 }
 
 .requirements-group {
   display: flex;
   flex-direction: column;
-  gap: $gap-sm;
+  gap: $spacing-2;
 }
 
 .requirements {
   li {
-    margin-bottom: pxToRem(4);
+    margin-bottom: $spacing-1;
   }
 }

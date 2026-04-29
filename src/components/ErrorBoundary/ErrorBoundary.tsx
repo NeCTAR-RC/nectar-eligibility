@@ -31,8 +31,8 @@ export default class ErrorBoundary extends Component<Props, State> {
         <div className={styles.container}>
           <h1 className={styles.heading}>Something went wrong</h1>
           <p className={styles.message}>
-            This page isn't working right now. Please try again later or
-            contact support if the problem persists.
+            This page isn't working right now. Please try again later or contact
+            support if the problem persists.
           </p>
           <Link
             href="https://support.ehelp.edu.au"

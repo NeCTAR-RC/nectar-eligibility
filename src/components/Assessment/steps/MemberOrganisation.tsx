@@ -3,6 +3,7 @@ import {
   ToggleButtonGroupItem,
   Combobox,
   ComboboxItem,
+  Label,
 } from "@ardc-ui/react";
 import { useAssessmentStore } from "../../../store/assessmentStore";
 import { organisations } from "../../../data/organisations";
@@ -55,12 +56,12 @@ export default function MemberOrganisation({ headingRef }: Props) {
       {answer === "yes" && (
         <div className={styles.orgSelection}>
           <Combobox
-            label="Select organisation (optional)"
             selectedKey={selectedOrg}
             onSelectionChange={(key) =>
               setAnswer("selectedOrganisation", key as string | null)
             }
           >
+            <Label>Select organisation (optional)</Label>
             {organisations.map((org) => (
               <ComboboxItem key={org.id} id={org.id}>
                 {org.name}

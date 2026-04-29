@@ -1,8 +1,9 @@
+@use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 .org-selection {
   display: flex;
   flex-direction: column;
-  gap: $gap-sm;
-  margin-top: $gap-sm;
+  gap: $spacing-2;
+  margin-top: $spacing-2;
 }

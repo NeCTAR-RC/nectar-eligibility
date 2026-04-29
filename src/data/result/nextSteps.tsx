@@ -31,7 +31,7 @@ const ELIGIBLE_STEPS: React.ReactNode[] = [
     >
       Connect your ORCID
     </a>{" "}
-    to the Nectar Dashboard.
+    to your Nectar account.
   </>,
   <>
     Start a{" "}

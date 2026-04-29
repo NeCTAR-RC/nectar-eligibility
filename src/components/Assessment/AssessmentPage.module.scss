@@ -1,14 +1,15 @@
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 .step-group {
   display: flex;
   flex-direction: column;
-  gap: $gap-sm;
+  gap: $spacing-2;
 }
 
 .question-number {
   font-size: pxToRem(14);
-  color: $color-gray-600;
+  color: $neutral-gray-700;
   margin: 0;
 }

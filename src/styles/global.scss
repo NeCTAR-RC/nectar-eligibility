@@ -1,4 +1,5 @@
 @use "@ardc-ui/react/styles/fonts";
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
@@ -17,8 +18,8 @@ body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
-  color: $color-gray-900;
-  background-color: $color-white;
+  color: $neutral-gray-900;
+  background-color: $neutral-white;
 }
 
 #root {
@@ -63,30 +64,47 @@ p {
 }
 
 :where(a) {
-  color: $color-primary;
+  color: $brand-purple-500;
   text-decoration: underline;
 
   &:hover,
   &:focus,
   &:active {
-    color: $color-gray-900;
-    text-decoration-color: $ardc-blue;
+    color: $neutral-gray-900;
+    text-decoration-color: $brand-blue-500;
     transition:
       color $transition-fast,
       background-color $transition-fast,
       border-color $transition-fast;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-outline-color;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
   }
 }
 
 ul,
 ol {
   margin: 0;
-  padding-left: pxToRem(20);
+  padding-left: $spacing-5;
 }
 
 img {
   max-width: 100%;
   height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media print {

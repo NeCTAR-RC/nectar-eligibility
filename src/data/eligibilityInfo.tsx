@@ -45,21 +45,11 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
           target="_blank"
           rel="noopener noreferrer"
         >
-          ORCID account to connect to your Nectar Dashboard
+          ORCID account to link to your Nectar account
         </a>
         .
       </>,
-      <>
-        You must agree to the{" "}
-        <a
-          href="https://dashboard.rc.nectar.org.au/terms/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          terms of the service
-        </a>
-        .
-      </>,
+      "You must agree to the terms of the service.",
     ],
   },
   local: {
@@ -96,21 +86,11 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
           target="_blank"
           rel="noopener noreferrer"
         >
-          ORCID account to connect to your Nectar Dashboard
+          ORCID account to link to your Nectar account
         </a>
         .
       </>,
-      <>
-        You must agree to the{" "}
-        <a
-          href="https://dashboard.rc.nectar.org.au/terms/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          terms of the service
-        </a>
-        .
-      </>,
+      "You must agree to the terms of the service.",
     ],
   },
   "not-eligible": {
@@ -130,38 +110,7 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
         </a>{" "}
         to log in.
       </>,
-      <>
-        You must agree to the terms of the service:
-        <ul>
-          <li>
-            <a
-              href="https://dashboard.rc.nectar.org.au/terms/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ARDC Nectar Research Cloud and JupyterHub Service Terms
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://desktop.rc.nectar.org.au/terms/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ARDC Virtual Desktop Service Terms
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://support.ehelp.edu.au/support/solutions/articles/6000264502"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ARDC BinderHub Service Terms
-            </a>
-          </li>
-        </ul>
-      </>,
+      "You must agree to the terms of the service.",
     ],
   },
 };

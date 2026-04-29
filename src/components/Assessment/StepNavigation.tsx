@@ -15,7 +15,7 @@ export default function StepNavigation() {
     <nav className={styles.nav} aria-label="Assessment navigation">
       <div className={styles.buttons}>
         <Button
-          variant="outline-primary"
+          variant="secondary"
           onPress={goToPreviousStep}
           isDisabled={isFirstStep}
         >

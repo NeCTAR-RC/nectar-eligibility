@@ -76,7 +76,7 @@ export default function ResultPage() {
         <div className={styles.buttons}>
           <Button
             ref={downloadBtnRef}
-            variant="outline-primary"
+            variant="secondary"
             onPress={handleDownloadPdf}
             isDisabled={downloading}
           >

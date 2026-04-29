@@ -11,16 +11,23 @@ interface Props {
 }
 
 export default function EligibleServices({ outcome, sessionId }: Props) {
-  const title =
-    outcome === "not-eligible" ? "ARDC Services" : "Eligible Services";
+  // SERVICES leads with the Nectar Dashboard for eligible scenarios; the not-eligible
+  // list moves it to the end and appends "(Project Trial)" to flag the limited access.
+  const orderedServices =
+    outcome === "not-eligible"
+      ? [
+          ...SERVICES.filter((s) => s.id !== "nectar-dashboard"),
+          ...SERVICES.filter((s) => s.id === "nectar-dashboard"),
+        ]
+      : SERVICES;
 
   return (
-    <ContentSection title={title}>
+    <ContentSection title="ARDC Services">
       <div className={styles.grid}>
-        {SERVICES.map((service) => {
+        {orderedServices.map((service) => {
           const displayName =
-            outcome === "not-eligible" && service.name === "Nectar Dashboard"
-              ? "Nectar Dashboard (Project Trial)"
+            outcome === "not-eligible" && service.id === "nectar-dashboard"
+              ? `${service.name} (Project Trial)`
               : service.name;
 
           return (

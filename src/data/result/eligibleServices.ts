@@ -8,28 +8,28 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
+    id: "nectar-dashboard",
+    name: "Nectar Dashboard",
+    description: "Fast, interactive, self-service cloud computing.",
+    href: "https://dashboard.rc.nectar.org.au/",
+  },
+  {
     id: "virtual-desktop",
-    name: "ARDC Virtual Desktop Service",
+    name: "Virtual Desktop Service",
     description: "Your extra computer in the cloud.",
     href: "https://desktop.rc.nectar.org.au/",
   },
   {
     id: "jupyter-notebook",
-    name: "ARDC Jupyter Notebook Service",
+    name: "Jupyter Notebook Service",
     description: "Develop code and computational output.",
     href: "https://jupyterhub.rc.nectar.org.au",
   },
   {
     id: "binderhub",
-    name: "ARDC BinderHub Service",
+    name: "BinderHub Service",
     description:
       "Make code repositories shareable, executable and reproducible.",
     href: "https://binderhub.rc.nectar.org.au/",
-  },
-  {
-    id: "nectar-dashboard",
-    name: "Nectar Dashboard",
-    description: "Fast, interactive, self-service cloud computing.",
-    href: "https://dashboard.rc.nectar.org.au/",
   },
 ];

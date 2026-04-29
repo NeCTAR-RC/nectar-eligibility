@@ -19,7 +19,7 @@ export const OUTCOME_ACTIONS: Record<EligibilityOutcome, OutcomeActions> = {
   },
   "not-eligible": {
     primary: {
-      label: "Explore resources for researcher",
+      label: "Explore resources for researchers",
       href: "https://ardc.edu.au/researcher/",
     },
   },

@@ -4,9 +4,9 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: pxToRem(20);
-  padding: pxToRem(20);
-  border: 1px solid $color-gray-200;
+  gap: $spacing-5;
+  padding: $spacing-5;
+  border: 1px solid $neutral-gray-100;
   border-radius: $border-radius;
 
   @include respond-to(md) {
@@ -15,7 +15,7 @@
 }
 
 .description {
-  margin-top: pxToRem(4);
+  margin-top: $spacing-1;
   font-size: $font-size-sm;
-  color: $color-gray-600;
+  color: $neutral-gray-700;
 }

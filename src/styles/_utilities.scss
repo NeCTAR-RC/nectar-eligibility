@@ -1,8 +1,9 @@
+@use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 @mixin action-buttons {
   display: flex;
-  gap: pxToRem(12);
+  gap: $spacing-3;
   flex-wrap: wrap;
 
   > * {
@@ -18,7 +19,7 @@
 @mixin nav-actions {
   display: flex;
   flex-direction: column;
-  gap: $gap-lg;
+  gap: $spacing-6;
 }
 
 @mixin start-over {

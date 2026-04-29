@@ -1,19 +1,21 @@
+@use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
 @use "mixins" as *;
 
 .page {
-  background-color: $color-gray-100;
+  @include container;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: $spacing-8;
 }
 
 .header {
-  @include container;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: pxToRem(16);
+  gap: $spacing-4;
   text-align: center;
-  padding-block: pxToRem(32);
 }
 
 .title {
@@ -30,7 +32,7 @@
 
 .subtitle {
   font-size: pxToRem(20);
-  color: $color-gray-700;
+  color: $neutral-gray-700;
   max-width: pxToRem(750);
   margin-inline: auto;
 
@@ -39,23 +41,19 @@
   }
 }
 
-.body {
-  @include container;
-  padding-bottom: pxToRem(48);
-}
-
 .card {
   display: flex;
   flex-direction: column;
-  gap: $gap-lg;
-  background: $color-white;
-  border: 1px solid $color-gray-200;
+  gap: $spacing-6;
+  background: $neutral-white;
+  border: 1px solid $neutral-gray-100;
   border-radius: $border-radius;
-  padding: pxToRem(32);
+  padding: $spacing-8;
   max-width: pxToRem(800);
   margin-inline: auto;
+  width: 100%;
 
   @include respond-below(sm) {
-    padding: pxToRem(20);
+    padding: $spacing-5;
   }
 }

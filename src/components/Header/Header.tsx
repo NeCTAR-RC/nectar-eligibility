@@ -10,6 +10,8 @@ export default function Header() {
           <img
             src={logo}
             alt="ARDC Nectar Research Cloud"
+            width="234"
+            height="72"
             className={styles.logo}
           />
           <span className={styles.title}>Eligibility Assessment</span>
@@ -17,8 +19,10 @@ export default function Header() {
         <Link
           href="https://support.ehelp.edu.au"
           target="_blank"
-          variant="outline-primary"
+          variant="primary"
+          tone="navigation"
           iconAfter="arrow-up-right-from-square"
+          chevronRight
           aria-label="Support Centre (opens in a new tab)"
         >
           Support Centre

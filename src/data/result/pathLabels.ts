@@ -12,6 +12,7 @@ import { ELIGIBILITY_INFO_CONTENT } from "../eligibilityInfo";
 
 import { ROLE_LABELS } from "../assessment/professionalRole";
 import { FUNDING_LABELS } from "../assessment/fundingSource";
+import { organisations } from "../organisations";
 
 export function formatAnswer(
   stepId: StepId,
@@ -28,6 +29,12 @@ export function formatAnswer(
       return answers.funding.map((f) => FUNDING_LABELS[f]).join(", ");
     case "member-organisation": {
       if (answers.memberOrganisation === "yes") {
+        if (answers.selectedOrganisation) {
+          const org = organisations.find(
+            (o) => o.id === answers.selectedOrganisation,
+          );
+          if (org) return org.name;
+        }
         return "Yes, my affiliated organisation is listed as a Nectar member";
       }
       return "No, my affiliated organisation is not in the list";
