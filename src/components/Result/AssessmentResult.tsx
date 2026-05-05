@@ -1,7 +1,7 @@
+import { Alert } from "@ardc-ui/react";
 import type { EligibilityOutcome } from "../../store/types";
 import { RESULT_HEADINGS, DISCLAIMERS } from "../../data/result/headings";
 import ContentSection from "../ContentSection/ContentSection";
-import styles from "./ResultPage.module.scss";
 
 interface Props {
   outcome: EligibilityOutcome;
@@ -16,9 +16,9 @@ export default function AssessmentResult({ outcome }: Props) {
       description={RESULT_HEADINGS[outcome]}
     >
       {disclaimer && (
-        <div className={styles.disclaimer} role="note">
+        <Alert tone="warning">
           <strong>DISCLAIMER:</strong> {disclaimer}
-        </div>
+        </Alert>
       )}
     </ContentSection>
   );

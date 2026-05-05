@@ -1,4 +1,5 @@
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 .grid {
@@ -15,7 +16,6 @@
 }
 
 .description {
+  @include ardc.text-style(body-14);
   margin-top: $spacing-1;
-  font-size: $font-size-sm;
-  color: $neutral-gray-700;
 }

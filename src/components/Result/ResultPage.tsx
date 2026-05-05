@@ -1,14 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Link } from "@ardc-ui/react";
 import { useAssessmentStore } from "../../store/assessmentStore";
 import { useAssessmentNav } from "../../store/useAssessmentNav";
 import { OUTCOME_ACTIONS } from "../../data/result/actions";
 import { downloadPdf } from "../../pdf/html2pdf/downloadPdf";
-import {
-  trackResultViewed,
-  trackPdfDownload,
-  trackCtaClick,
-} from "../../services/analytics";
+import { trackPdfDownload, trackCtaClick } from "../../services/analytics";
 import PageShell from "../PageShell/PageShell";
 import AssessmentResult from "./AssessmentResult";
 import NextSteps from "./NextSteps";
@@ -23,14 +19,6 @@ export default function ResultPage() {
   const downloadBtnRef = useRef<HTMLButtonElement>(null);
   const startOverRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
-  const tracked = useRef(false);
-
-  useEffect(() => {
-    if (outcome && sessionId && !tracked.current) {
-      tracked.current = true;
-      trackResultViewed(outcome, sessionId);
-    }
-  }, [outcome, sessionId]);
 
   if (!outcome) return null;
 
@@ -74,14 +62,25 @@ export default function ResultPage() {
 
       <nav className={styles.actions} aria-label="Result actions">
         <div className={styles.buttons}>
-          <Button
-            ref={downloadBtnRef}
-            variant="secondary"
-            onPress={handleDownloadPdf}
-            isDisabled={downloading}
-          >
-            {downloading ? "Generating…" : "Download PDF"}
-          </Button>
+          {downloading ? (
+            <Button
+              ref={downloadBtnRef}
+              variant="secondary"
+              isDisabled
+              state="loading"
+              loadingText="Generating…"
+            >
+              Download PDF
+            </Button>
+          ) : (
+            <Button
+              ref={downloadBtnRef}
+              variant="secondary"
+              onPress={handleDownloadPdf}
+            >
+              Download PDF
+            </Button>
+          )}
           <Link
             href={actions.primary.href}
             target="_blank"

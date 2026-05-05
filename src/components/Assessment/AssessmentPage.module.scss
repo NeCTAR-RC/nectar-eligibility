@@ -1,5 +1,6 @@
 @use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 .step-group {
@@ -9,7 +10,14 @@
 }
 
 .question-number {
-  font-size: pxToRem(14);
-  color: $neutral-gray-700;
+  @include ardc.text-style(body-14);
   margin: 0;
+}
+
+.intro-lead {
+  @include ardc.text-style(body-18);
+}
+
+.intro-note {
+  @include ardc.text-style(body-14-muted);
 }

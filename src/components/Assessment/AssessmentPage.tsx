@@ -71,9 +71,20 @@ export default function AssessmentPage() {
         </>
       }
       subtitle={
-        isFirstStep
-          ? "Check your eligibility for cloud resources and services. This quick 3–5 question assessment will help determine whether you meet the requirements for a national or local allocation on the Nectar Cloud."
-          : undefined
+        isFirstStep ? (
+          <>
+            <p className={styles.introLead}>
+              Check your eligibility for cloud resources and services. This
+              quick 3–5 question assessment will help determine whether you meet
+              the requirements for a national or local allocation on the Nectar
+              Cloud.
+            </p>
+            <p className={styles.introNote}>
+              This assessment is for self-guidance only. No personal data or
+              sensitive information is stored during this process.
+            </p>
+          </>
+        ) : undefined
       }
     >
       <SessionAlert />

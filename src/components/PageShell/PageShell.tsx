@@ -3,7 +3,7 @@ import styles from "./PageShell.module.scss";
 
 interface PageShellProps {
   title: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   headingRef?: RefObject<HTMLHeadingElement | null>;
   children: React.ReactNode;
 }
@@ -20,7 +20,7 @@ export default function PageShell({
         <h1 ref={headingRef} tabIndex={-1} className={styles.title}>
           {title}
         </h1>
-        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
       </header>
       <div className={styles.card}>{children}</div>
     </div>

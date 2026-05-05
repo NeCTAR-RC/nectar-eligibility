@@ -1,6 +1,7 @@
 @use "@ardc-ui/react/styles/fonts";
 @use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 *,
@@ -14,11 +15,8 @@ html {
 }
 
 body {
+  @include ardc.text-style(body-16);
   margin: 0;
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  font-weight: $font-weight-normal;
-  color: $neutral-gray-900;
   background-color: $neutral-white;
 }
 
@@ -33,30 +31,24 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
   margin: 0;
-  font-family: $font-family-base;
-  font-weight: $font-weight-semibold;
 }
 
 h1 {
-  font-size: pxToRem(40);
+  @include ardc.text-style(h1);
 }
 h2 {
-  font-size: pxToRem(32);
+  @include ardc.text-style(h2);
 }
 h3 {
-  font-size: pxToRem(28);
+  @include ardc.text-style(h3);
 }
 h4 {
-  font-size: pxToRem(24);
+  @include ardc.text-style(h4);
 }
 h5 {
-  font-size: pxToRem(20);
-}
-h6 {
-  font-size: pxToRem(16);
+  @include ardc.text-style(h5);
 }
 
 p {
@@ -65,6 +57,7 @@ p {
 
 :where(a) {
   color: $brand-purple-500;
+  font-weight: $font-weight-bold;
   text-decoration: underline;
 
   &:hover,

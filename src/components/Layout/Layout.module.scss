@@ -11,7 +11,7 @@
   background: $neutral-gray-900;
   color: $neutral-white;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
 
   &:focus {
     left: 0;
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   padding-block: $spacing-16;
-  background-color: $neutral-gray-100;
+  background-color: $neutral-gray-50;
   scroll-margin-top: pxToRem(92);
 
   @include respond-below(md) {

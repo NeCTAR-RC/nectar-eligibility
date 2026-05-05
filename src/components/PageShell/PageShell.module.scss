@@ -1,5 +1,6 @@
 @use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 .page {
@@ -19,26 +20,21 @@
 }
 
 .title {
-  font-size: pxToRem(28);
-
   &:focus {
     outline: none;
   }
 
-  @include respond-below(sm) {
-    font-size: pxToRem(28);
+  @include respond-below(md) {
+    @include ardc.text-style(mobile-h1);
   }
 }
 
 .subtitle {
-  font-size: pxToRem(20);
-  color: $neutral-gray-700;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
   max-width: pxToRem(750);
   margin-inline: auto;
-
-  @include respond-below(sm) {
-    font-size: $font-size-base;
-  }
 }
 
 .card {

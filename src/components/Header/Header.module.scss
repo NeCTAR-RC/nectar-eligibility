@@ -1,5 +1,6 @@
 @use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 .header {
@@ -50,9 +51,7 @@
 }
 
 .title {
-  font-size: $font-size-base;
-  font-weight: $font-weight-normal;
-  color: rgba(0, 0, 0, 0.7);
+  @include ardc.text-style(body-16);
 
   @include respond-below(sm) {
     display: none;

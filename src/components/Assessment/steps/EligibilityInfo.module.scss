@@ -1,5 +1,6 @@
 @use "@ardc-ui/react/styles/functions" as *;
 @use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
 
 .info {
@@ -16,7 +17,7 @@
   text-align: center;
 
   h2 {
-    font-size: pxToRem(20);
+    @include ardc.text-style(h4);
     margin: 0;
 
     &:focus {

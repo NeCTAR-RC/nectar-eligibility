@@ -127,43 +127,41 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className={styles.copyrightRow}>
-        <div className={styles.copyrightBar}>
-          <span className={styles.copyrightText}>
-            Copyright &copy; {year} ARDC.{" "}
-            <a
-              href="https://www.acnc.gov.au/charity/charities/eca273f3-f5be-e911-a98a-000d3ad02a61/profile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ACN 633 798 857
-            </a>
-          </span>
+      <div className={styles.copyrightBar}>
+        <span className={styles.copyrightText}>
+          Copyright &copy; {year} ARDC.{" "}
           <a
-            href="https://ardc.edu.au/terms-and-conditions/"
+            href="https://www.acnc.gov.au/charity/charities/eca273f3-f5be-e911-a98a-000d3ad02a61/profile"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.footerLink}
           >
-            Terms and Conditions
+            ACN 633 798 857
           </a>
-          <a
-            href="https://ardc.edu.au/privacy-policy/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.footerLink}
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="https://ardc.edu.au/accessibility-statement-for-ardc/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.footerLink}
-          >
-            Accessibility Statement
-          </a>
-        </div>
+        </span>
+        <a
+          href="https://ardc.edu.au/terms-and-conditions/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.footerLink}
+        >
+          Terms and Conditions
+        </a>
+        <a
+          href="https://ardc.edu.au/privacy-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.footerLink}
+        >
+          Privacy Policy
+        </a>
+        <a
+          href="https://ardc.edu.au/accessibility-statement-for-ardc/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.footerLink}
+        >
+          Accessibility Statement
+        </a>
       </div>
     </footer>
   );

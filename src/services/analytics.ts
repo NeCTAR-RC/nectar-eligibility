@@ -1,10 +1,8 @@
 import ReactGA from "react-ga4";
 import type { StepId, EligibilityOutcome } from "../store/types";
+import * as durationTracker from "./durationTracker";
 
 let initialized = false;
-
-// In-memory timestamp for duration tracking — reset each assessment
-let assessmentStartTime: number | null = null;
 
 const COMPLETED_FLAG = "nectar-eligibility:has-completed";
 const DOWNLOADED_FLAG = "nectar-eligibility:has-downloaded-pdf";
@@ -48,10 +46,9 @@ export function trackStepCompleted(
   questionNumber: number,
   sessionId: string,
 ): void {
-  // Start the duration clock on the first step completion
-  if (assessmentStartTime === null) {
-    assessmentStartTime = Date.now();
-  }
+  // Start (or resume from localStorage) the active-engagement timer for this
+  // session on the first step completion.
+  durationTracker.startOrResume(sessionId);
 
   send("step_completed", {
     step_id: stepId,
@@ -78,10 +75,7 @@ export function trackAssessmentComplete(
   path: StepId[],
   sessionId: string,
 ): void {
-  const durationSeconds =
-    assessmentStartTime !== null
-      ? Math.round((Date.now() - assessmentStartTime) / 1000)
-      : 0;
+  const durationSeconds = durationTracker.flushAndGetSeconds(sessionId);
 
   let isRepeat = false;
   try {
@@ -98,6 +92,8 @@ export function trackAssessmentComplete(
     is_repeat: isRepeat ? "true" : "false",
     duration_seconds: durationSeconds,
   });
+
+  durationTracker.clear(sessionId);
 }
 
 export function trackAssessmentAbandoned(
@@ -109,8 +105,7 @@ export function trackAssessmentAbandoned(
     session_id: sessionId,
   });
 
-  // Reset the duration clock since they're starting fresh
-  assessmentStartTime = null;
+  durationTracker.clear(sessionId);
 }
 
 export function trackAssessmentRestarted(
@@ -122,8 +117,7 @@ export function trackAssessmentRestarted(
     session_id: sessionId,
   });
 
-  // Reset the duration clock for the new assessment
-  assessmentStartTime = null;
+  durationTracker.clear(sessionId);
 }
 
 export function trackResultViewed(

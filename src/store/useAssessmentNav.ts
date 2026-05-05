@@ -18,7 +18,9 @@ import {
   trackAssessmentComplete,
   trackAssessmentAbandoned,
   trackAssessmentRestarted,
+  trackResultViewed,
 } from "../services/analytics";
+import { switchSession as switchDurationSession } from "../services/durationTracker";
 
 export function useAssessmentNav() {
   const location = useLocation();
@@ -35,6 +37,7 @@ export function useAssessmentNav() {
   useEffect(() => {
     if (sessionId && sessionId !== storeSessionId) {
       useAssessmentStore.getState().initSession(sessionId);
+      switchDurationSession(sessionId);
     }
   }, [sessionId, storeSessionId]);
 
@@ -81,15 +84,28 @@ export function useAssessmentNav() {
       useAssessmentStore.getState().setOutcome(resolveOutcome(answers));
     }
 
-    // Eligibility info is where users see their outcome — treat as assessment completion
-    if (currentStepId === "eligibility-info") {
+    // Eligibility info is where users see their outcome — treat arrival as
+    // assessment completion. Firing here (rather than on departure) means
+    // users who see their outcome but abandon before acknowledging the
+    // requirements are still counted.
+    if (nextStepId === "eligibility-info") {
       const outcome = useAssessmentStore.getState().outcome;
       if (outcome) {
         trackAssessmentComplete(
           outcome,
-          [...stepHistory, currentStepId],
+          [...stepHistory, currentStepId, nextStepId],
           sessionId,
         );
+      }
+    }
+
+    // Reaching the result page (past the requirements gate) is the engagement
+    // signal — fire here rather than from the result page's mount effect so
+    // analytics-event firing for assessment lifecycle stays in one place.
+    if (nextStepId === "result") {
+      const outcome = useAssessmentStore.getState().outcome;
+      if (outcome) {
+        trackResultViewed(outcome, sessionId);
       }
     }
 

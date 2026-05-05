@@ -43,6 +43,17 @@ PRD Goals #1, #2, #5, #7, #8 are measured externally (Freshdesk, allocation syst
 
 When counting "how many assessments were completed", use **Event count for `assessment_complete`** (one per app session), not GA4's Sessions metric. When counting "how many unique people used the tool", use **Active Users** (GA4's deduplicated user count).
 
+### Lifecycle Events: `assessment_complete` vs `result_viewed`
+
+Two events bracket the post-questions phase, and the gap between them is meaningful:
+
+| Event                 | Fires when                                                          | What it means                                                              |
+| --------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `assessment_complete` | User answers the final question — they arrive at the outcome screen | They saw their eligibility outcome (tick or X)                             |
+| `result_viewed`       | User acknowledges requirements and proceeds to the full result page | They engaged with the result content (PDF, services, next steps available) |
+
+`assessment_complete` count − `result_viewed` count = users who saw their outcome but stopped at the requirements gate. Segment by `Outcome` to see whether ineligible vs eligible users drop off at different rates.
+
 ### Repeat User Skew
 
 A single user can complete the assessment multiple times (each "Start Over" = new app session). This inflates event counts. Every dashboard should account for this:
