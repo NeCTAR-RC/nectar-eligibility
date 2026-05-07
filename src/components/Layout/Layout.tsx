@@ -1,6 +1,5 @@
 import { Outlet } from "react-router";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import styles from "./Layout.module.scss";
 
 export default function Layout() {
@@ -13,7 +12,6 @@ export default function Layout() {
       <main id="main-content" className={styles.main}>
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 }
