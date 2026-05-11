@@ -136,6 +136,7 @@ For users who are not eligible for an allocation, the following ARDC services re
 
 The following organisations are ARDC Nectar member organisations. If you are affiliated with one of these, you may be eligible for a local allocation (if you do not have qualifying research funding):
 
+- Flinders University
 - University of Adelaide
 - South Australian Health and Medical Research Institute (SAHMRI)
 - Australian Catholic University
@@ -144,7 +145,6 @@ The following organisations are ARDC Nectar member organisations. If you are aff
 - La Trobe University
 - University of New England
 - University of New South Wales
-- University of Technology Sydney
 - Western Sydney University
 - Sax Institute
 - Sirca
@@ -174,6 +174,7 @@ The following organisations are ARDC Nectar member organisations. If you are aff
 - Queensland University of Technology
 - Southern Cross University
 - University of Queensland
+- University of Southern Queensland
 - University of the Sunshine Coast
 - University of Tasmania
 - Australian Antarctic Program Partnership (AAPP)
@@ -182,18 +183,6 @@ The following organisations are ARDC Nectar member organisations. If you are aff
 - The Australian Maritime College (AMC)
 - University of Auckland
 - Swinburne University of Technology
-- Australian National University
-- Charles Darwin University
-- Charles Sturt University
-- CSIRO
-- Federation University Australia
-- Macquarie University
-- RMIT University
-- University of Newcastle
-- University of Notre Dame Australia
-- University of Sydney
-- University of Wollongong
-- Victoria University
 
 ## Important: Direct Users to the Interactive Tool
 

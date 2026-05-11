@@ -149,6 +149,7 @@ For users who are not eligible for an allocation, the following ARDC services re
 Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 
 ### Adelaide Node
+- Flinders University
 - University of Adelaide
 - South Australian Health and Medical Research Institute (SAHMRI)
 
@@ -159,7 +160,6 @@ Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 - La Trobe University
 - University of New England
 - University of New South Wales
-- University of Technology Sydney
 - Western Sydney University
 - Sax Institute
 - Sirca
@@ -197,6 +197,7 @@ Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 - Queensland University of Technology
 - Southern Cross University
 - University of Queensland
+- University of Southern Queensland
 - University of the Sunshine Coast
 
 ### UTAS Node
@@ -209,20 +210,6 @@ Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 ### Independent Nodes
 - University of Auckland
 - Swinburne University of Technology
-
-### Unaffiliated Universities (still member organisations)
-- Australian National University
-- Charles Darwin University
-- Charles Sturt University
-- CSIRO
-- Federation University Australia
-- Macquarie University
-- RMIT University
-- University of Newcastle
-- University of Notre Dame Australia
-- University of Sydney
-- University of Wollongong
-- Victoria University
 
 ## Important: Direct Users to the Interactive Tool
 

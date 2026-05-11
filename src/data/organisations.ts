@@ -3,10 +3,9 @@ export interface Organisation {
   name: string;
 }
 
-// Order is stable — append new entries at the end of each section.
-// Existing indices are used for URL state encoding (see persistence.ts).
 export const organisations: Organisation[] = [
   // Adelaide Node
+  { id: "flinders-university", name: "Flinders University" },
   { id: "university-of-adelaide", name: "University of Adelaide" },
   {
     id: "sahmri",
@@ -25,10 +24,6 @@ export const organisations: Organisation[] = [
   {
     id: "university-of-new-south-wales",
     name: "University of New South Wales",
-  },
-  {
-    id: "university-of-technology-sydney",
-    name: "University of Technology Sydney",
   },
   { id: "western-sydney-university", name: "Western Sydney University" },
   { id: "sax-institute", name: "Sax Institute" },
@@ -92,6 +87,10 @@ export const organisations: Organisation[] = [
   { id: "southern-cross-university", name: "Southern Cross University" },
   { id: "university-of-queensland", name: "University of Queensland" },
   {
+    id: "university-of-southern-queensland",
+    name: "University of Southern Queensland",
+  },
+  {
     id: "university-of-the-sunshine-coast",
     name: "University of the Sunshine Coast",
   },
@@ -118,27 +117,4 @@ export const organisations: Organisation[] = [
     id: "swinburne-university-of-technology",
     name: "Swinburne University of Technology",
   },
-
-  // Unaffiliated Universities
-  {
-    id: "australian-national-university",
-    name: "Australian National University",
-  },
-  { id: "charles-darwin-university", name: "Charles Darwin University" },
-  { id: "charles-sturt-university", name: "Charles Sturt University" },
-  { id: "csiro", name: "CSIRO" },
-  {
-    id: "federation-university-australia",
-    name: "Federation University Australia",
-  },
-  { id: "macquarie-university", name: "Macquarie University" },
-  { id: "rmit-university", name: "RMIT University" },
-  { id: "university-of-newcastle", name: "University of Newcastle" },
-  {
-    id: "university-of-notre-dame",
-    name: "University of Notre Dame Australia",
-  },
-  { id: "university-of-sydney", name: "University of Sydney" },
-  { id: "university-of-wollongong", name: "University of Wollongong" },
-  { id: "victoria-university", name: "Victoria University" },
 ];
