@@ -56,6 +56,7 @@ export default function MemberOrganisation({ headingRef }: Props) {
       {answer === "yes" && (
         <div className={styles.orgSelection}>
           <Combobox
+            placeholder="Type to search..."
             selectedKey={selectedOrg}
             onSelectionChange={(key) =>
               setAnswer("selectedOrganisation", key as string | null)
