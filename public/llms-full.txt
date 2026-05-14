@@ -119,13 +119,13 @@ START
 ## Requirements by Outcome
 
 ### For National or Local Allocation:
-1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
+1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. Follow Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. ORCID account linked to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. Agree to the terms of the service.
 
 ### For Not Eligible (project trial or ARDC services):
-1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
+1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. Agree to the terms of the service.
 
 ## ARDC Nectar Services

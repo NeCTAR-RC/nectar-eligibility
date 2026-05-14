@@ -19,7 +19,7 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
       <>
         You need{" "}
         <a
-          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account"
+          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -60,7 +60,7 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
       <>
         You need AAF or Tuakiri account credentials to{" "}
         <a
-          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account"
+          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -102,7 +102,7 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
       <>
         You will need an{" "}
         <a
-          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account"
+          href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >

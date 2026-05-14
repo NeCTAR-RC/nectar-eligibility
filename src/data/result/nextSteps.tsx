@@ -15,7 +15,7 @@ const ELIGIBLE_STEPS: React.ReactNode[] = [
   <>
     Ensure you have{" "}
     <a
-      href="https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account"
+      href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -53,7 +53,7 @@ export const NEXT_STEPS: Record<EligibilityOutcome, React.ReactNode[]> = {
     <>
       You can still log in to the dashboard with{" "}
       <a
-        href="https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account"
+        href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
         target="_blank"
         rel="noopener noreferrer"
       >

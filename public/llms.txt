@@ -70,7 +70,7 @@ View the full list of ARDC Nectar member organisations: https://support.ehelp.ed
 This result does not guarantee you will receive a Nectar allocation. All research project information must be provided when requesting an allocation and your request will be assessed by a Nectar representative.
 
 Requirements for Nectar Project Allocations:
-1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
+1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must follow the Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. You must have an ORCID account to link to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. You must agree to the terms of the service.
@@ -90,7 +90,7 @@ Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 This result does not guarantee you will receive a Nectar allocation. All research project information must be provided when requesting an allocation and your request will be assessed by a Nectar representative from your local Nectar Node.
 
 Requirements for Nectar Project Allocations:
-1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
+1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must follow the Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. You must have an ORCID account to link to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. You must agree to the terms of the service.
@@ -108,7 +108,7 @@ Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 "The selections you have made in this assessment indicate that you are not eligible for an allocation on the Nectar Cloud. However, you may still be able to access the Nectar Cloud with a 6 month project trial or use other ARDC services powered by the Nectar Cloud, providing you meet the requirements."
 
 Requirements for a project trial or ARDC services powered by the Nectar Cloud:
-1. You will need an AAF or Tuakiri account to log in — https://support.ehelp.edu.au/support/solutions/articles/6000055377-getting-an-account
+1. You will need an AAF or Tuakiri account to log in — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must agree to the terms of the service.
 
 Next steps:
