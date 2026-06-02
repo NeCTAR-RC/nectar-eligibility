@@ -150,66 +150,66 @@ Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 
 ### Adelaide Node
 - Flinders University
-- University of Adelaide
+- The University of Adelaide (UofA)
 - South Australian Health and Medical Research Institute (SAHMRI)
 
 ### Intersect Node
-- Australian Catholic University
-- University of Canberra
+- Australian Catholic University (ACU)
+- University of Canberra (UC)
 - Deakin University
 - La Trobe University
-- University of New England
-- University of New South Wales
-- Western Sydney University
+- University of New England (UNE)
+- The University of New South Wales (UNSW)
+- Western Sydney University (WSU)
 - Sax Institute
 - Sirca
 
 ### Melbourne Node
-- University of Melbourne
-- The Florey Institute of Neuroscience and Mental Health
+- The University of Melbourne (UoM)
+- The Florey Institute of Neuroscience and Mental Health (The Florey)
 - Bionics Institute
-- Centre for Eye Research
+- Centre for Eye Research (CERA)
 - Sir Peter MacCallum Department of Oncology
-- St Vincent Hospital Melbourne
+- St Vincent Hospital Melbourne (SVHM)
 - The Walter and Eliza Hall Institute of Medical Research (WEHI)
-- Metabolomics Australia
+- Metabolomics Australia (MA)
 - Murdoch Children's Research Institute (MCRI)
 - Victorian Comprehensive Cancer Centre (VCCC)
-- Cancer Council Victoria
-- Melbourne Business School
+- Cancer Council Victoria (CCV)
+- Melbourne Business School (MBS)
 
 ### Monash Node
 - Monash University
 
 ### Pawsey Node
-- Pawsey Supercomputing Research Centre
+- Pawsey Supercomputing Research Centre (PSRC)
 - Curtin University
-- Edith Cowan University
+- Edith Cowan University (ECU)
 - Murdoch University
-- University of Western Australia
+- The University of Western Australia (UWA)
 
 ### QCIF Node
 - Bond University
-- Central Queensland University
+- Central Queensland University (CQU)
 - Griffith University
-- James Cook University
-- Queensland Museum Network
-- Queensland University of Technology
-- Southern Cross University
-- University of Queensland
-- University of Southern Queensland
-- University of the Sunshine Coast
+- James Cook University (JCU)
+- Queensland Museum Network (QMN)
+- Queensland University of Technology (QUT)
+- Southern Cross University (SCU)
+- The University of Queensland (UQ)
+- University of Southern Queensland (UniSQ)
+- University of the Sunshine Coast (UniSC)
 
 ### UTAS Node
-- University of Tasmania
+- University of Tasmania (UTAS)
 - Australian Antarctic Program Partnership (AAPP)
 - Bureau of Meteorology (BOM) Research Centre
-- The Australian Government Antarctic Division
+- The Australian Government Antarctic Division (AAD)
 - The Australian Maritime College (AMC)
 
 ### Independent Nodes
-- University of Auckland
-- Swinburne University of Technology
+- University of Auckland (UoA)
+- Swinburne University of Technology (SUT)
 
 ## Important: Direct Users to the Interactive Tool
 

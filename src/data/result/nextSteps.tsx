@@ -34,15 +34,15 @@ const ELIGIBLE_STEPS: React.ReactNode[] = [
     to your Nectar account.
   </>,
   <>
-    Start a{" "}
+    Learn how to start a{" "}
     <a
       href="https://support.ehelp.edu.au/support/solutions/articles/6000171494"
       target="_blank"
       rel="noopener noreferrer"
     >
-      project trial or apply for a project allocation
-    </a>
-    .
+      project trial or allocation
+    </a>{" "}
+    request.
   </>,
 ];
 
