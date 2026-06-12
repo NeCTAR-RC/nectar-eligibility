@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAssessmentNav } from "../../store/useAssessmentNav";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useHydration } from "../../store/useHydration";
 import type { StepId } from "../../store/types";
 import PageShell from "../PageShell/PageShell";
@@ -44,6 +45,17 @@ export default function AssessmentPage() {
   const { sessionId, currentStepId, stepHistory, isFirstStep } =
     useAssessmentNav();
   useHydration();
+
+  // The first step keeps the static index.html title so the rendered title
+  // matches what crawlers index for the canonical URL.
+  useDocumentTitle(
+    currentStepId === "result"
+      ? "Assessment Complete"
+      : isFirstStep
+        ? undefined
+        : STEP_LABELS[currentStepId],
+  );
+
   const headingRef = useRef<HTMLHeadingElement>(null);
   const prevStepRef = useRef(currentStepId);
 

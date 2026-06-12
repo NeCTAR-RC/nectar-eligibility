@@ -1,11 +1,13 @@
 import { expect, type Page } from "@playwright/test";
 
+// Scoped to main: the ardc-footer newsletter form renders the same role
+// labels ("Researcher", etc.) once its remote content loads.
 export async function selectRole(page: Page, label: string) {
-  await page.getByText(label, { exact: true }).click();
+  await page.locator("main").getByText(label, { exact: true }).click();
 }
 
 export async function clickToggle(page: Page, label: string) {
-  await page.getByText(label, { exact: true }).click();
+  await page.locator("main").getByText(label, { exact: true }).click();
 }
 
 export async function clickContinue(page: Page) {

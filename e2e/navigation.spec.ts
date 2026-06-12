@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import {
   selectRole,
   clickToggle,
@@ -139,6 +139,44 @@ test.describe("Back navigation", () => {
     await clickToggle(page, "No");
     await clickContinue(page);
     await expectHeading(page, /not eligible for an allocation/i);
+  });
+});
+
+test.describe("Footer integration", () => {
+  // Footer hydration is blocked in e2e (see fixtures.ts); this guards the
+  // static integration points so a regression in index.html is still caught.
+  test("ardc-footer element and loader script are present", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(page.locator("ardc-footer")).toBeAttached();
+    await expect(
+      page.locator('script[src*="loaders/footer.min.js"]'),
+    ).toBeAttached();
+  });
+});
+
+test.describe("Document titles", () => {
+  const baseTitle = "ARDC Nectar Research Cloud Eligibility Assessment";
+
+  test("steps prefix the title, first step keeps the base title", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(page).toHaveTitle(baseTitle);
+
+    await selectRole(page, "Researcher");
+    await clickContinue(page);
+    await expect(page).toHaveTitle(`Australian Affiliation | ${baseTitle}`);
+
+    await clickPrevious(page);
+    await expect(page).toHaveTitle(baseTitle);
+  });
+
+  test("result page sets the assessment complete title", async ({ page }) => {
+    await page.goto("/");
+    await completeNationalPath(page, "Researcher");
+    await expect(page).toHaveTitle(`Assessment Complete | ${baseTitle}`);
   });
 });
 

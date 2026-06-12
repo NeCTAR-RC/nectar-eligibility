@@ -37,6 +37,11 @@ React 19 + TypeScript, React Router (BrowserRouter), Zustand 5 + Immer, @ardc-ui
 - Tests should give confidence for refactoring.
 - Tests should be declarative and not imperative.
 
+### E2E isolation from third-party content
+- E2E specs must import `test`/`expect` from `e2e/fixtures.ts`, not `@playwright/test`. The fixture aborts all requests to `ardc.edu.au` so the ardc-footer's live remote content (which changes without notice — its newsletter form once duplicated our role labels and broke selectors) never enters the test DOM.
+- Helpers that query by text are scoped to `main` as a second layer against header/footer collisions.
+- The footer's static integration points (element + loader script) are guarded by the "Footer integration" test in `e2e/navigation.spec.ts`.
+
 ### Selector Notes (React Aria quirks)
 - **RadioGroupItem**: use `getByText(label)` not `getByRole("radio")` — SVG indicator intercepts clicks
 - **ToggleButtonGroupItem**: use `getByText(label)` not `getByRole("button")` — doesn't have button role
@@ -54,7 +59,8 @@ See the README "Outbound clicks caveat" section for details. Reference implement
 ## Commands
 ```bash
 pnpm dev              # Dev server (localhost:5173)
-pnpm build            # Production build
+pnpm build            # Production build (no prerender)
+pnpm build:geo        # Production build + prerender landing page (needs a Playwright browser)
 pnpm preview          # Serve production build
 pnpm lint             # ESLint
 pnpm test             # Unit tests
@@ -81,7 +87,8 @@ Static files that make the eligibility logic discoverable by LLMs and search eng
 - `public/llms-full.txt` — Extended version with worked examples, edge cases, and org list by node
 - `public/robots.txt` — Crawler directives
 - `public/sitemap.xml` — URL index
-- `index.html` — JSON-LD structured data (FAQPage, HowTo, WebApplication) + `<noscript>` fallback + meta tags
+- `index.html` — JSON-LD structured data (FAQPage, HowTo, WebApplication) + meta tags. The `<noscript>` block is only a short JavaScript notice; it must not carry content.
+- `scripts/prerender.mjs` — runs via `pnpm build:geo` (plain `pnpm build` then prerender); snapshots the rendered landing page into `#root` of `dist/index.html` so crawlers and LLM fetchers that don't execute JavaScript receive real content. Auto-synced with the app by construction — never edit `dist/index.html` by hand. It launches a Playwright browser, so it is kept out of plain `pnpm build`: only the production deploy needs prerendered HTML, while the build/test-e2e CI jobs run plain `pnpm build` and would otherwise fail with no browser installed.
 
 ### Keeping GEO Files in Sync
 
@@ -89,9 +96,9 @@ When modifying eligibility logic or content, the GEO files must be updated manua
 
 1. **Eligibility rules change** (`src/store/flowEngine.ts`): Update the decision tree in `llms.txt` and `llms-full.txt`, and the HowTo/FAQ JSON-LD in `index.html`.
 2. **Assessment questions/options change** (`src/data/assessment/*.ts`): Update the corresponding steps in `llms.txt` and `llms-full.txt`.
-3. **Outcome descriptions or requirements change** (`src/data/eligibilityInfo.tsx`, `src/data/result/`): Update the Outcomes section in both `llms.txt` and `llms-full.txt`, FAQ answers in the JSON-LD, and `<noscript>` content.
+3. **Outcome descriptions or requirements change** (`src/data/eligibilityInfo.tsx`, `src/data/result/`): Update the Outcomes section in both `llms.txt` and `llms-full.txt`, and FAQ answers in the JSON-LD.
 4. **Member organisations change** (`src/data/organisations.ts`): Update the member organisations list in `llms.txt` (flat list) and `llms-full.txt` (grouped by node).
-5. **Services change** (`src/data/result/eligibleServices.ts`): Update the services section in both `llms.txt`, `llms-full.txt`, and `<noscript>`.
+5. **Services change** (`src/data/result/eligibleServices.ts`): Update the services section in both `llms.txt` and `llms-full.txt`.
 
 Source of truth for content: `src/data/` files. Source of truth for logic: `src/store/flowEngine.ts`.
 
