@@ -3,6 +3,7 @@ import {
   selectRole,
   clickToggle,
   clickContinue,
+  clickContinueToSummary,
   checkFunding,
   checkAcknowledge,
   expectHeading,
@@ -26,9 +27,9 @@ test.describe("Local allocation path", () => {
 
     await expectHeading(page, /eligible for a local allocation/i);
     await checkAcknowledge(page);
-    await clickContinue(page);
+    await clickContinueToSummary(page);
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/local allocation/i).first()).toBeVisible();
     await expect(page.getByText(/local Nectar Node/i)).toBeVisible();
   });
@@ -51,7 +52,7 @@ test.describe("Local allocation path", () => {
 
     await expectHeading(page, /eligible for a local allocation/i);
     await checkAcknowledge(page);
-    await clickContinue(page);
-    await expectHeading(page, "Assessment Complete");
+    await clickContinueToSummary(page);
+    await expectHeading(page, "Assessment Summary");
   });
 });

@@ -71,13 +71,13 @@ test.describe("localStorage persistence", () => {
     await page.goto("/");
     await completeNationalPath(page, "Researcher");
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     expectPath(
       page,
       "/australian-affiliation/funding-source/eligibility-info/result",
     );
     await page.reload();
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/national allocation/i).first()).toBeVisible();
     expectPath(
       page,

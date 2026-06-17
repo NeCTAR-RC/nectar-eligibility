@@ -17,15 +17,16 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
     requirementsHeading: "Requirements for Nectar Project Allocations:",
     requirements: [
       <>
-        You need{" "}
+        You need institutional credentials to log into the Nectar Dashboard (via
+        an{" "}
         <a
           href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >
           AAF or Tuakiri account
-        </a>{" "}
-        credentials to log into the Nectar Dashboard.
+        </a>
+        ).
       </>,
       <>
         You must follow the{" "}
@@ -58,15 +59,16 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
     requirementsHeading: "Requirements for Nectar Project Allocations:",
     requirements: [
       <>
-        You need AAF or Tuakiri account credentials to{" "}
+        You need institutional credentials to log into the Nectar Dashboard (via
+        an{" "}
         <a
           href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >
-          log into the Nectar Dashboard
+          AAF or Tuakiri account
         </a>
-        .
+        ).
       </>,
       <>
         You must follow the{" "}
@@ -100,15 +102,15 @@ export const ELIGIBILITY_INFO_CONTENT: Record<
       "Requirements for a project trial or ARDC services powered by the Nectar Cloud:",
     requirements: [
       <>
-        You will need an{" "}
+        You will need institutional credentials to log in (via an{" "}
         <a
           href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
           target="_blank"
           rel="noopener noreferrer"
         >
           AAF or Tuakiri account
-        </a>{" "}
-        to log in.
+        </a>
+        ).
       </>,
       "You must agree to the terms of the service.",
     ],

@@ -3,6 +3,7 @@ import {
   selectRole,
   clickToggle,
   clickContinue,
+  clickContinueToSummary,
   checkFunding,
   checkAcknowledge,
   expectHeading,
@@ -32,9 +33,9 @@ test.describe("National allocation via Australian affiliation", () => {
       page.getByText(/Requirements for Nectar Project Allocations/i),
     ).toBeVisible();
     await checkAcknowledge(page);
-    await clickContinue(page);
+    await clickContinueToSummary(page);
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/national allocation/i).first()).toBeVisible();
     await expect(page.getByText(/does not guarantee/i)).toBeVisible();
     await expect(
@@ -52,8 +53,8 @@ test.describe("National allocation via Australian affiliation", () => {
 
     await expectHeading(page, /eligible for a national allocation/i);
     await checkAcknowledge(page);
-    await clickContinue(page);
-    await expectHeading(page, "Assessment Complete");
+    await clickContinueToSummary(page);
+    await expectHeading(page, "Assessment Summary");
   });
 
   test("multiple funding sources", async ({ page }) => {
@@ -89,8 +90,8 @@ test.describe("National allocation via Auckland affiliation", () => {
 
     await expectHeading(page, /eligible for a national allocation/i);
     await checkAcknowledge(page);
-    await clickContinue(page);
-    await expectHeading(page, "Assessment Complete");
+    await clickContinueToSummary(page);
+    await expectHeading(page, "Assessment Summary");
   });
 });
 
@@ -98,10 +99,10 @@ test.describe("PDF download", () => {
   test("downloads a PDF from the result page", async ({ page }) => {
     await page.goto("/");
     await completeNationalPath(page, "Researcher");
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
 
     const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("button", { name: "Download PDF" }).click();
+    await page.getByRole("button", { name: "Download Summary" }).click();
     const download = await downloadPromise;
 
     expect(download.suggestedFilename()).toMatch(

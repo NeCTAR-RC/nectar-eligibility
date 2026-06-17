@@ -50,7 +50,7 @@ export default function AssessmentPage() {
   // matches what crawlers index for the canonical URL.
   useDocumentTitle(
     currentStepId === "result"
-      ? "Assessment Complete"
+      ? "Assessment Summary"
       : isFirstStep
         ? undefined
         : STEP_LABELS[currentStepId],
@@ -87,9 +87,9 @@ export default function AssessmentPage() {
           <>
             <p className={styles.introLead}>
               Check your eligibility for cloud resources and services. This
-              quick 3–5 question assessment will help determine whether you meet
-              the requirements for a national or local allocation on the Nectar
-              Cloud.
+              quick 3 – 5 question assessment will help determine whether you
+              meet the requirements for a national or local allocation on the
+              Nectar Cloud.
             </p>
             <p className={styles.introNote}>
               This assessment is for self-guidance only. No personal data or

@@ -62,7 +62,7 @@ export default function MemberOrganisation({ headingRef }: Props) {
               setAnswer("selectedOrganisation", key as string | null)
             }
           >
-            <Label>Select organisation (optional)</Label>
+            <Label>Select affiliated organisation (optional)</Label>
             {organisations.map((org) => (
               <ComboboxItem key={org.id} id={org.id}>
                 {org.name}

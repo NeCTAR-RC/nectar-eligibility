@@ -173,10 +173,10 @@ test.describe("Document titles", () => {
     await expect(page).toHaveTitle(baseTitle);
   });
 
-  test("result page sets the assessment complete title", async ({ page }) => {
+  test("result page sets the assessment summary title", async ({ page }) => {
     await page.goto("/");
     await completeNationalPath(page, "Researcher");
-    await expect(page).toHaveTitle(`Assessment Complete | ${baseTitle}`);
+    await expect(page).toHaveTitle(`Assessment Summary | ${baseTitle}`);
   });
 });
 
@@ -200,7 +200,7 @@ test.describe("Start Over", () => {
     await page.goto("/");
     await completeNotEligiblePath(page, "Researcher");
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await startOver(page);
     expectPath(page, "/");
     await expectHeading(page, /professional position or role/i);
@@ -211,13 +211,13 @@ test.describe("Start Over", () => {
 
     // First: not eligible path
     await completeNotEligiblePath(page, "Researcher");
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/not eligible/i).first()).toBeVisible();
 
     // Start over and take national path
     await startOver(page);
     await completeNationalPath(page, "Researcher");
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/national allocation/i).first()).toBeVisible();
   });
 });

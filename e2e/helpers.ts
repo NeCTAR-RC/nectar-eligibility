@@ -11,7 +11,12 @@ export async function clickToggle(page: Page, label: string) {
 }
 
 export async function clickContinue(page: Page) {
-  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+}
+
+// The requirements step's Continue button names its destination.
+export async function clickContinueToSummary(page: Page) {
+  await page.getByRole("button", { name: "Continue to summary" }).click();
 }
 
 export async function clickPrevious(page: Page) {
@@ -60,7 +65,7 @@ export async function completeNotEligiblePath(page: Page, role: string) {
   await clickToggle(page, "No");
   await clickContinue(page);
   await checkAcknowledge(page);
-  await clickContinue(page);
+  await clickContinueToSummary(page);
 }
 
 /**
@@ -75,7 +80,7 @@ export async function completeNationalPath(page: Page, role: string) {
   await checkFunding(page, /national or international research grant/i);
   await clickContinue(page);
   await checkAcknowledge(page);
-  await clickContinue(page);
+  await clickContinueToSummary(page);
 }
 
 /**
@@ -92,5 +97,5 @@ export async function completeLocalPath(page: Page, role: string) {
   await clickToggle(page, "Yes");
   await clickContinue(page);
   await checkAcknowledge(page);
-  await clickContinue(page);
+  await clickContinueToSummary(page);
 }

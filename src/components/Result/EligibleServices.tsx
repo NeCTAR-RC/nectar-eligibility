@@ -11,8 +11,9 @@ interface Props {
 }
 
 export default function EligibleServices({ outcome, sessionId }: Props) {
-  // SERVICES leads with the Nectar Dashboard for eligible scenarios; the not-eligible
-  // list moves it to the end and appends "(Project Trial)" to flag the limited access.
+  // SERVICES leads with the Nectar Research Cloud for eligible scenarios; the
+  // not-eligible list moves it to the end and appends "(Project Trial)" to flag
+  // the limited, trial-only access.
   const orderedServices =
     outcome === "not-eligible"
       ? [

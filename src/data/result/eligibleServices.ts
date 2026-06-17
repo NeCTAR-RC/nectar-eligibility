@@ -9,7 +9,7 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: "nectar-dashboard",
-    name: "Nectar Dashboard",
+    name: "Nectar Research Cloud",
     description: "Fast, interactive, self-service cloud computing.",
     href: "https://dashboard.rc.nectar.org.au/",
   },

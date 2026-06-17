@@ -48,7 +48,7 @@ export default function ResultPage() {
 
   return (
     <PageShell
-      title="Assessment Complete"
+      title="Assessment Summary"
       subtitle="You have completed the assessment for resource allocation and services on the ARDC Nectar Research Cloud. Based on the information you provided, the following recommendations and options are available to you."
     >
       <AssessmentResult outcome={outcome} />
@@ -70,15 +70,16 @@ export default function ResultPage() {
               state="loading"
               loadingText="Generating…"
             >
-              Download PDF
+              Download Summary
             </Button>
           ) : (
             <Button
               ref={downloadBtnRef}
               variant="secondary"
+              iconBefore="pdf"
               onPress={handleDownloadPdf}
             >
-              Download PDF
+              Download Summary
             </Button>
           )}
           <Link

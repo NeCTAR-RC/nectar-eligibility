@@ -3,6 +3,7 @@ import {
   selectRole,
   clickToggle,
   clickContinue,
+  clickContinueToSummary,
   checkFunding,
   checkAcknowledge,
   expectHeading,
@@ -24,9 +25,9 @@ test.describe("Not eligible - no affiliation", () => {
       page.getByText(/project trial or ARDC services/i),
     ).toBeVisible();
     await checkAcknowledge(page);
-    await clickContinue(page);
+    await clickContinueToSummary(page);
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/not eligible/i).first()).toBeVisible();
     await expect(page.getByText(/project trial/i).first()).toBeVisible();
     await expect(
@@ -52,9 +53,9 @@ test.describe("Not eligible - no member org", () => {
 
     await expectHeading(page, /not eligible for an allocation/i);
     await checkAcknowledge(page);
-    await clickContinue(page);
+    await clickContinueToSummary(page);
 
-    await expectHeading(page, "Assessment Complete");
+    await expectHeading(page, "Assessment Summary");
     await expect(page.getByText(/not eligible/i).first()).toBeVisible();
   });
 });

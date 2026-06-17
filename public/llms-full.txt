@@ -119,30 +119,30 @@ START
 ## Requirements by Outcome
 
 ### For National or Local Allocation:
-1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377
+1. Institutional credentials to log into the Nectar Dashboard (via an AAF or Tuakiri account) — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. Follow Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. ORCID account linked to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. Agree to the terms of the service.
 
 ### For Not Eligible (project trial or ARDC services):
-1. AAF or Tuakiri account credentials — https://support.ehelp.edu.au/support/solutions/articles/6000055377
+1. Institutional credentials to log in (via an AAF or Tuakiri account) — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. Agree to the terms of the service.
 
 ## ARDC Nectar Services
 
 For eligible users (national or local allocation):
 
-1. **Nectar Dashboard** — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
+1. **Nectar Research Cloud** — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
 2. **Virtual Desktop Service** — Your extra computer in the cloud — https://desktop.rc.nectar.org.au/
 3. **Jupyter Notebook Service** — Develop code and computational output — https://jupyterhub.rc.nectar.org.au
 4. **BinderHub Service** — Make code repositories shareable, executable and reproducible — https://binderhub.rc.nectar.org.au/
 
-For users who are not eligible for an allocation, the following ARDC services remain available (Nectar Dashboard is offered as a project trial only):
+For users who are not eligible for an allocation, the following ARDC services remain available (the Nectar Research Cloud is offered as a project trial only):
 
 1. **Virtual Desktop Service** — https://desktop.rc.nectar.org.au/
 2. **Jupyter Notebook Service** — https://jupyterhub.rc.nectar.org.au
 3. **BinderHub Service** — https://binderhub.rc.nectar.org.au/
-4. **Nectar Dashboard (Project Trial)** — https://dashboard.rc.nectar.org.au/
+4. **Nectar Research Cloud (Project Trial)** — https://dashboard.rc.nectar.org.au/
 
 ## ARDC Nectar Member Organisations (by Node)
 

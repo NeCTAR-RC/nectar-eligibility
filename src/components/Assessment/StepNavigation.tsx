@@ -6,10 +6,16 @@ export default function StepNavigation() {
   const {
     isFirstStep,
     canContinue,
+    currentStepId,
     goToNextStep,
     goToPreviousStep,
     handleStartOver,
   } = useAssessmentNav();
+
+  // The requirements step is the only one that leads to the result page,
+  // so its Continue button names the destination.
+  const continueLabel =
+    currentStepId === "eligibility-info" ? "Continue to summary" : "Continue";
 
   return (
     <nav className={styles.nav} aria-label="Assessment navigation">
@@ -26,7 +32,7 @@ export default function StepNavigation() {
           onPress={goToNextStep}
           isDisabled={!canContinue}
         >
-          Continue
+          {continueLabel}
         </Button>
       </div>
       {!isFirstStep && (

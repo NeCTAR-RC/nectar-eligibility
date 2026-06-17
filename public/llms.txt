@@ -70,16 +70,16 @@ View the full list of ARDC Nectar member organisations: https://support.ehelp.ed
 This result does not guarantee you will receive a Nectar allocation. All research project information must be provided when requesting an allocation and your request will be assessed by a Nectar representative.
 
 Requirements for Nectar Project Allocations:
-1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377
+1. You need institutional credentials to log into the Nectar Dashboard (via an AAF or Tuakiri account) — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must follow the Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. You must have an ORCID account to link to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. You must agree to the terms of the service.
 
-Next steps:
+Next steps (before applying for an allocation, complete any of the following steps that you have not already completed):
 - Review the Sensitive Data Guidelines
-- Ensure you have AAF or Tuakiri account credentials
+- Ensure you have institutional credentials to log in to the Nectar Dashboard (via an AAF or Tuakiri account)
 - Connect your ORCID to your Nectar account
-- Learn how to start a project trial or allocation request — https://support.ehelp.edu.au/support/solutions/articles/6000171494
+- Learn about project allocation and expiry — https://support.ehelp.edu.au/support/solutions/articles/6000171494
 
 Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 
@@ -90,16 +90,16 @@ Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 This result does not guarantee you will receive a Nectar allocation. All research project information must be provided when requesting an allocation and your request will be assessed by a Nectar representative from your local Nectar Node.
 
 Requirements for Nectar Project Allocations:
-1. You need AAF or Tuakiri account credentials to log into the Nectar Dashboard — https://support.ehelp.edu.au/support/solutions/articles/6000055377
+1. You need institutional credentials to log into the Nectar Dashboard (via an AAF or Tuakiri account) — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must follow the Sensitive Data Guidelines — https://support.ehelp.edu.au/support/solutions/articles/6000277743
 3. You must have an ORCID account to link to your Nectar account — https://support.ehelp.edu.au/support/solutions/articles/6000277260
 4. You must agree to the terms of the service.
 
-Next steps:
+Next steps (before applying for an allocation, complete any of the following steps that you have not already completed):
 - Review the Sensitive Data Guidelines
-- Ensure you have AAF or Tuakiri account credentials
+- Ensure you have institutional credentials to log in to the Nectar Dashboard (via an AAF or Tuakiri account)
 - Connect your ORCID to your Nectar account
-- Learn how to start a project trial or allocation request — https://support.ehelp.edu.au/support/solutions/articles/6000171494
+- Learn about project allocation and expiry — https://support.ehelp.edu.au/support/solutions/articles/6000171494
 
 Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 
@@ -108,11 +108,11 @@ Apply for an allocation: https://dashboard.rc.nectar.org.au/allocation/
 "The selections you have made in this assessment indicate that you are not eligible for an allocation on the Nectar Cloud. However, you may still be able to access the Nectar Cloud with a 6 month project trial or use other ARDC services powered by the Nectar Cloud, providing you meet the requirements."
 
 Requirements for a project trial or ARDC services powered by the Nectar Cloud:
-1. You will need an AAF or Tuakiri account to log in — https://support.ehelp.edu.au/support/solutions/articles/6000055377
+1. You will need institutional credentials to log in (via an AAF or Tuakiri account) — https://support.ehelp.edu.au/support/solutions/articles/6000055377
 2. You must agree to the terms of the service.
 
 Next steps:
-- You can still log in with AAF or Tuakiri credentials and start a 6 month project trial — https://support.ehelp.edu.au/support/solutions/articles/6000068044
+- You can still log in to the dashboard with institutional credentials (via an AAF or Tuakiri account) and start a 6 month project trial — https://support.ehelp.edu.au/support/solutions/articles/6000068044
 - Depending on your specific cloud needs, you may like to try other eligible ARDC Nectar Research Cloud Services — https://ardc.edu.au/services/ardc-nectar-research-cloud/
 - We recommend you refer to your institution's cloud offerings, or explore other ARDC resources available to researchers — https://ardc.edu.au/researcher/
 
@@ -120,17 +120,17 @@ Next steps:
 
 For eligible users (national or local allocation):
 
-1. Nectar Dashboard — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
+1. Nectar Research Cloud — Fast, interactive, self-service cloud computing — https://dashboard.rc.nectar.org.au/
 2. Virtual Desktop Service — Your extra computer in the cloud — https://desktop.rc.nectar.org.au/
 3. Jupyter Notebook Service — Develop code and computational output — https://jupyterhub.rc.nectar.org.au
 4. BinderHub Service — Make code repositories shareable, executable and reproducible — https://binderhub.rc.nectar.org.au/
 
-For users who are not eligible for an allocation, the following ARDC services remain available (Nectar Dashboard is offered as a project trial only):
+For users who are not eligible for an allocation, the following ARDC services remain available (the Nectar Research Cloud is offered as a project trial only):
 
 1. Virtual Desktop Service — https://desktop.rc.nectar.org.au/
 2. Jupyter Notebook Service — https://jupyterhub.rc.nectar.org.au
 3. BinderHub Service — https://binderhub.rc.nectar.org.au/
-4. Nectar Dashboard (Project Trial) — https://dashboard.rc.nectar.org.au/
+4. Nectar Research Cloud (Project Trial) — https://dashboard.rc.nectar.org.au/
 
 ## ARDC Nectar Member Organisations
 

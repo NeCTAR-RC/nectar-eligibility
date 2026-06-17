@@ -13,15 +13,16 @@ const ELIGIBLE_STEPS: React.ReactNode[] = [
     .
   </>,
   <>
-    Ensure you have{" "}
+    Ensure you have institutional credentials to log in to the Nectar Dashboard
+    (via an{" "}
     <a
       href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
       target="_blank"
       rel="noopener noreferrer"
     >
-      AAF or Tuakiri account credentials
+      AAF or Tuakiri account
     </a>
-    .
+    ).
   </>,
   <>
     <a
@@ -34,32 +35,42 @@ const ELIGIBLE_STEPS: React.ReactNode[] = [
     to your Nectar account.
   </>,
   <>
-    Learn how to start a{" "}
+    Learn about{" "}
     <a
       href="https://support.ehelp.edu.au/support/solutions/articles/6000171494"
       target="_blank"
       rel="noopener noreferrer"
     >
-      project trial or allocation
-    </a>{" "}
-    request.
+      project allocation and expiry
+    </a>
+    .
   </>,
 ];
+
+const ELIGIBLE_STEPS_SUBTITLE =
+  "Before applying for an allocation, complete any of the following steps that you have not already completed.";
+
+export const NEXT_STEPS_SUBTITLE: Partial<Record<EligibilityOutcome, string>> =
+  {
+    national: ELIGIBLE_STEPS_SUBTITLE,
+    local: ELIGIBLE_STEPS_SUBTITLE,
+  };
 
 export const NEXT_STEPS: Record<EligibilityOutcome, React.ReactNode[]> = {
   national: ELIGIBLE_STEPS,
   local: ELIGIBLE_STEPS,
   "not-eligible": [
     <>
-      You can still log in to the dashboard with{" "}
+      You can still log in to the dashboard with institutional credentials (via
+      an{" "}
       <a
         href="https://support.ehelp.edu.au/support/solutions/articles/6000055377"
         target="_blank"
         rel="noopener noreferrer"
       >
         AAF or Tuakiri account
-      </a>{" "}
-      credentials and start a{" "}
+      </a>
+      ) and start a{" "}
       <a
         href="https://support.ehelp.edu.au/support/solutions/articles/6000068044"
         target="_blank"
