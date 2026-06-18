@@ -10,6 +10,7 @@ import AssessmentResult from "./AssessmentResult";
 import NextSteps from "./NextSteps";
 import EligibleServices from "./EligibleServices";
 import AssessmentPath from "./AssessmentPath";
+import FeedbackSection from "./FeedbackSection";
 import styles from "./ResultPage.module.scss";
 
 export default function ResultPage() {
@@ -18,6 +19,7 @@ export default function ResultPage() {
   const { sessionId, stepHistory, handleStartOver } = useAssessmentNav();
   const downloadBtnRef = useRef<HTMLButtonElement>(null);
   const startOverRef = useRef<HTMLDivElement>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
 
   if (!outcome) return null;
@@ -31,6 +33,7 @@ export default function ResultPage() {
     const elementsToHide = [
       downloadBtnRef.current,
       startOverRef.current,
+      feedbackRef.current,
     ].filter(Boolean) as HTMLElement[];
     setDownloading(true);
     try {
@@ -47,56 +50,66 @@ export default function ResultPage() {
   }
 
   return (
-    <PageShell
-      title="Assessment Summary"
-      subtitle="You have completed the assessment for resource allocation and services on the ARDC Nectar Research Cloud. Based on the information you provided, the following recommendations and options are available to you."
-    >
-      <AssessmentResult outcome={outcome} />
-      <NextSteps outcome={outcome} />
-      <EligibleServices outcome={outcome} sessionId={sessionId} />
-      <AssessmentPath
-        stepHistory={stepHistory}
-        answers={answers}
-        outcome={outcome}
-      />
+    <>
+      <PageShell
+        title="Assessment Summary"
+        subtitle="You have completed the assessment for resource allocation and services on the ARDC Nectar Research Cloud. Based on the information you provided, the following recommendations and options are available to you."
+      >
+        <AssessmentResult outcome={outcome} />
+        <NextSteps outcome={outcome} />
+        <EligibleServices outcome={outcome} sessionId={sessionId} />
+        <AssessmentPath
+          stepHistory={stepHistory}
+          answers={answers}
+          outcome={outcome}
+        />
 
-      <nav className={styles.actions} aria-label="Result actions">
-        <div className={styles.buttons}>
-          {downloading ? (
-            <Button
-              ref={downloadBtnRef}
-              variant="secondary"
-              isDisabled
-              state="loading"
-              loadingText="Generating…"
+        <nav className={styles.actions} aria-label="Result actions">
+          <div className={styles.buttons}>
+            {downloading ? (
+              <Button
+                ref={downloadBtnRef}
+                variant="secondary"
+                isDisabled
+                state="loading"
+                loadingText="Generating…"
+              >
+                Download Summary
+              </Button>
+            ) : (
+              <Button
+                ref={downloadBtnRef}
+                variant="secondary"
+                iconBefore="pdf"
+                onPress={handleDownloadPdf}
+              >
+                Download Summary
+              </Button>
+            )}
+            <Link
+              href={actions.primary.href}
+              target="_blank"
+              variant="primary"
+              onPress={handleCtaClick}
             >
-              Download Summary
-            </Button>
-          ) : (
+              {actions.primary.label}
+            </Link>
+          </div>
+          <div ref={startOverRef} className={styles.startOver}>
             <Button
-              ref={downloadBtnRef}
-              variant="secondary"
-              iconBefore="pdf"
-              onPress={handleDownloadPdf}
+              variant="link"
+              iconBefore="rotate"
+              onPress={handleStartOver}
             >
-              Download Summary
+              Start over
             </Button>
-          )}
-          <Link
-            href={actions.primary.href}
-            target="_blank"
-            variant="primary"
-            onPress={handleCtaClick}
-          >
-            {actions.primary.label}
-          </Link>
-        </div>
-        <div ref={startOverRef} className={styles.startOver}>
-          <Button variant="link" iconBefore="rotate" onPress={handleStartOver}>
-            Start over
-          </Button>
-        </div>
-      </nav>
-    </PageShell>
+          </div>
+        </nav>
+      </PageShell>
+
+      <div ref={feedbackRef} className={styles.feedback}>
+        <FeedbackSection outcome={outcome} sessionId={sessionId} />
+      </div>
+    </>
   );
 }

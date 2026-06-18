@@ -33,6 +33,21 @@ test.describe("Not eligible - no affiliation", () => {
     await expect(
       page.getByRole("link", { name: "Explore resources for researcher" }),
     ).toBeVisible();
+
+    // Feedback banner: heading is visible and the survey link points to the
+    // external form in a new tab (assert attributes only — don't navigate out).
+    const main = page.locator("main");
+    await expect(
+      main.getByRole("heading", {
+        name: "Help us improve the Eligibility Assessment Tool",
+      }),
+    ).toBeVisible();
+    const surveyLink = main.getByRole("link", { name: /Start the survey/i });
+    await expect(surveyLink).toHaveAttribute(
+      "href",
+      "https://forms.gle/1Z1EYSUJmd6YWFjk8",
+    );
+    await expect(surveyLink).toHaveAttribute("target", "_blank");
   });
 });
 

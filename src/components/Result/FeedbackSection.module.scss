@@ -1,0 +1,46 @@
+@use "@ardc-ui/react/styles/functions" as *;
+@use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
+@use "mixins" as *;
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $spacing-8;
+  padding: pxToRem(40) pxToRem(48);
+  background: rgba($brand-purple-500, 0.05);
+  border: 1px solid $neutral-gray-100;
+  border-radius: $border-radius-lg;
+  width: 100%;
+  max-width: pxToRem(800);
+  margin-inline: auto;
+
+  @include respond-below(sm) {
+    padding: $spacing-8 $spacing-6;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  max-width: pxToRem(640);
+}
+
+.eyebrow {
+  font-size: pxToRem(13);
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $neutral-gray-500;
+}
+
+.heading {
+  @include ardc.text-style(h3);
+}
+
+.body {
+  @include ardc.text-style(body-16);
+}
