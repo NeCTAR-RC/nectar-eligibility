@@ -19,7 +19,7 @@
 @mixin nav-actions {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
+  gap: $spacing-8;
 }
 
 @mixin start-over {

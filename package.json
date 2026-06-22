@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@ardc-ui/react": "^3.4.0",
+    "@ardc-ui/react": "^3.4.1",
     "html2pdf.js": "^0.14.0",
     "immer": "^11.1.8",
     "react": "^19.2.6",
