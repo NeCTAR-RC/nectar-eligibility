@@ -21,6 +21,7 @@ export default function Header() {
           target="_blank"
           variant="primary"
           tone="navigation"
+          size="sm"
           iconAfter="arrow-up-right-from-square"
           chevronRight
           aria-label="Support Centre (opens in a new tab)"

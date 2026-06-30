@@ -54,7 +54,7 @@ test.describe("Back navigation", () => {
     await clickToggle(page, "Yes");
     await clickContinue(page);
 
-    // On funding step — go back
+    // On funding step, go back
     await clickPrevious(page);
     await expectHeading(page, /Australian University/i);
 
@@ -76,7 +76,7 @@ test.describe("Back navigation", () => {
     await checkFunding(page, /national or international research grant/i);
     await clickContinue(page);
 
-    // On eligibility info — go back 3 steps
+    // On eligibility info, go back 3 steps
     expectPath(page, "/australian-affiliation/funding-source/eligibility-info");
     await clickPrevious(page);
     await expectHeading(page, /funded by/i);
@@ -120,7 +120,7 @@ test.describe("Back navigation", () => {
   }) => {
     await page.goto("/");
 
-    // Go through AU Yes → national grant → eligibility info
+    // Go through AU Yes -> national grant -> eligibility info
     await selectRole(page, "Researcher");
     await clickContinue(page);
     await clickToggle(page, "Yes");
@@ -135,7 +135,7 @@ test.describe("Back navigation", () => {
     await clickToggle(page, "No");
     await clickContinue(page);
 
-    // Auckland = No → not eligible
+    // Auckland = No -> not eligible
     await clickToggle(page, "No");
     await clickContinue(page);
     await expectHeading(page, /not eligible for an allocation/i);

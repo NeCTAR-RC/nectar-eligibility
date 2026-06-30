@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:geo": "pnpm build && node scripts/prerender.mjs",
+    "build:geo": "node scripts/inject-rules.mjs",
     "lint:js": "eslint .",
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "lint": "pnpm lint:js && pnpm lint:scss && pnpm format:check",

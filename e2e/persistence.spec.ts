@@ -19,7 +19,7 @@ test.describe("localStorage persistence", () => {
     await clickToggle(page, "Yes");
     await clickContinue(page);
 
-    // On funding step — reload
+    // On funding step, reload
     expectPath(page, "/australian-affiliation/funding-source");
     await page.reload();
     await expectHeading(page, /funded by/i);
@@ -36,7 +36,7 @@ test.describe("localStorage persistence", () => {
     await clickToggle(page, "No");
     await clickContinue(page);
 
-    // On eligibility info — reload
+    // On eligibility info, reload
     await expectHeading(page, /not eligible for an allocation/i);
     expectPath(
       page,

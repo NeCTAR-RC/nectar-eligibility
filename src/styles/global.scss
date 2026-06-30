@@ -3,6 +3,7 @@
 @use "@ardc-ui/react/styles/variables" as *;
 @use "@ardc-ui/react/styles/typography" as ardc;
 @use "mixins" as *;
+@use "static-rules";
 
 *,
 *::before,

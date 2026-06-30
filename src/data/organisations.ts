@@ -4,6 +4,7 @@ export interface Organisation {
 }
 
 export const organisations: Organisation[] = [
+  { id: "adelaide-university", name: "Adelaide University" },
   { id: "aapp", name: "Australian Antarctic Program Partnership (AAPP)" },
   {
     id: "australian-catholic-university",
@@ -73,7 +74,6 @@ export const organisations: Organisation[] = [
     id: "florey-institute",
     name: "The Florey Institute of Neuroscience and Mental Health (The Florey)",
   },
-  { id: "university-of-adelaide", name: "The University of Adelaide (UofA)" },
   { id: "university-of-melbourne", name: "The University of Melbourne (UoM)" },
   {
     id: "university-of-new-south-wales",

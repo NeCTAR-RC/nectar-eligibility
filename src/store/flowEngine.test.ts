@@ -288,7 +288,7 @@ describe("hasAnswerForStep", () => {
 });
 
 // ---------------------------------------------------------------------------
-// replayAnswers — full flow paths
+// replayAnswers: full flow paths
 // ---------------------------------------------------------------------------
 
 describe("replayAnswers", () => {
@@ -428,7 +428,7 @@ describe("replayAnswers", () => {
       makeAnswers({
         role: "researcher",
         australianAffiliation: "yes",
-        aucklandAffiliation: "yes", // should be trimmed — AU is yes
+        aucklandAffiliation: "yes", // should be trimmed, AU is yes
         funding: ["government-grant"],
         acknowledgedRequirements: true,
       }),
@@ -443,7 +443,7 @@ describe("replayAnswers", () => {
         role: "researcher",
         australianAffiliation: "yes",
         funding: ["industry-grant"],
-        memberOrganisation: "yes", // should be trimmed — has real funding
+        memberOrganisation: "yes", // should be trimmed, has real funding
         acknowledgedRequirements: true,
       }),
     );

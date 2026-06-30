@@ -84,7 +84,7 @@ export function useAssessmentNav() {
       useAssessmentStore.getState().setOutcome(resolveOutcome(answers));
     }
 
-    // Eligibility info is where users see their outcome — treat arrival as
+    // Eligibility info is where users see their outcome, so treat arrival as
     // assessment completion. Firing here (rather than on departure) means
     // users who see their outcome but abandon before acknowledging the
     // requirements are still counted.
@@ -100,7 +100,7 @@ export function useAssessmentNav() {
     }
 
     // Reaching the result page (past the requirements gate) is the engagement
-    // signal — fire here rather than from the result page's mount effect so
+    // signal. Fire here rather than from the result page's mount effect so
     // analytics-event firing for assessment lifecycle stays in one place.
     if (nextStepId === "result") {
       const outcome = useAssessmentStore.getState().outcome;

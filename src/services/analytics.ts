@@ -16,7 +16,7 @@ export function initializeAnalytics(): void {
   const debugMode = import.meta.env.VITE_GA_DEBUG_MODE === "true";
 
   if (!measurementId) {
-    console.warn("[Analytics] No measurement ID provided — skipping init");
+    console.warn("[Analytics] No measurement ID provided, skipping init");
     return;
   }
 

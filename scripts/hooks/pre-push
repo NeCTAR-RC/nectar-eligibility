@@ -3,7 +3,7 @@
 # nectar-eligibility managed hook: pre-push
 # Mirror the Jenkins patchset gates (lint + test + test-e2e): fail locally iff CI
 # would. The e2e step matches nodejs-test-e2e (build, install chromium, run e2e).
-# Heavy by design — set ARDC_HOOKS=0 or `git push --no-verify` to bypass when needed.
+# Heavy by design. Set ARDC_HOOKS=0 or `git push --no-verify` to bypass when needed.
 set -e
 pnpm lint
 pnpm test

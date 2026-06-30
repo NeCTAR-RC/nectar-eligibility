@@ -55,7 +55,7 @@ function persist(sessionId: string): void {
 }
 
 // Add the gap since lastTickAt to the accumulator, clamped to IDLE_CAP_MS.
-// Treats every quiet period the same — hidden tab, idle, reload, sleep — so
+// Treats every quiet period the same (hidden tab, idle, reload, sleep), so
 // one long absence can never dominate the metric.
 function accumulate(): void {
   if (lastTickAt === null) return;
@@ -80,7 +80,7 @@ function stopInterval(): void {
 
 // Register a page-unload listener so the most recent activity is persisted
 // before the browser tears the page down. On the next visit the reload gap
-// will be capped, so we don't strictly need the final flush — but it shrinks
+// will be capped, so we don't strictly need the final flush, but it shrinks
 // the lost-precision window for short reloads.
 export function init(): void {
   if (pageHideListenerRegistered) return;

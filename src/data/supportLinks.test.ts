@@ -11,7 +11,7 @@ import { MEMBER_ORGANISATION_DESCRIPTION } from "./assessment/memberOrganisation
 // the form .../articles/<id>-<title-slug> carries a slug derived from the
 // article's current title, so it breaks if the article is renamed. Every
 // support link must therefore use the bare-ID form. This guard fails if a slug
-// suffix is reintroduced anywhere — in the JSX data modules or in the static
+// suffix is reintroduced anywhere, in the JSX data modules or in the static
 // GEO files that mirror their content.
 const SLUG_SUFFIX = /support\/solutions\/articles\/\d+-/;
 

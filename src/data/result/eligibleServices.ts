@@ -1,5 +1,5 @@
 export interface Service {
-  /** Stable identifier used as `cta_label` for analytics — never rename, even if `name` changes. */
+  /** Stable identifier used as `cta_label` for analytics. Never rename, even if `name` changes. */
   id: string;
   name: string;
   description: string;

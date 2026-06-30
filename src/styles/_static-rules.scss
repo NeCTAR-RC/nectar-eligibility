@@ -1,0 +1,68 @@
+@use "@ardc-ui/react/styles/functions" as *;
+@use "@ardc-ui/react/styles/variables" as *;
+@use "@ardc-ui/react/styles/typography" as ardc;
+
+// Styles for the no-JavaScript eligibility rules that scripts/prerender.mjs
+// renders (from the assessment data modules) and injects into the <noscript> of
+// index.html. A global, scoped class block rather than a CSS module: the markup
+// is produced at build time and injected as static HTML, so module hashes would
+// not match the production bundle. Headings and body type come from global.scss;
+// global.scss also zeroes element margins, so spacing here is done with flex gap.
+.static-rules {
+  max-width: pxToRem(800);
+  margin-inline: auto;
+  padding: $spacing-8 $spacing-6;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+
+  .title {
+    color: $brand-purple-500;
+  }
+
+  .note {
+    color: $neutral-gray-500;
+  }
+
+  a {
+    @include ardc.text-style(body-16-link);
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-outline-color;
+      outline-offset: 2px;
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  li {
+    margin-block: $spacing-1;
+  }
+
+  // Nested content within a decision-tree step (sub-options and descriptions),
+  // which global.scss would otherwise leave flush against the question text.
+  li > ul,
+  li > p {
+    margin-top: $spacing-2;
+  }
+
+  .card {
+    border: 1px solid $neutral-gray-100;
+    border-radius: $border-radius;
+    padding: $spacing-6;
+    background: rgba($brand-purple-500, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+
+  .outcome {
+    border-left: pxToRem(4) solid $brand-purple-500;
+    padding-left: $spacing-4;
+  }
+}

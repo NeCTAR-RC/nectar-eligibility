@@ -28,7 +28,7 @@ describe("durationTracker", () => {
     vi.useRealTimers();
   });
 
-  describe("startOrResume — first visit", () => {
+  describe("startOrResume: first visit", () => {
     it("initialises activeMs to 0 and persists a record", async () => {
       const tracker = await loadFresh();
       tracker.startOrResume(SESSION);
@@ -45,7 +45,7 @@ describe("durationTracker", () => {
       const tracker = await loadFresh();
       tracker.startOrResume(SESSION);
 
-      // Advance 5s — one tick fires
+      // Advance 5s, one tick fires
       vi.advanceTimersByTime(5_000);
 
       const record = readTimingRecord(SESSION);
@@ -119,7 +119,7 @@ describe("durationTracker", () => {
         JSON.stringify({ activeMs: 12_500, lastTickAt: null }),
       );
 
-      // No startOrResume for OTHER_SESSION — should still return the
+      // No startOrResume for OTHER_SESSION, should still return the
       // persisted value.
       expect(tracker.flushAndGetSeconds(OTHER_SESSION)).toBe(13);
     });

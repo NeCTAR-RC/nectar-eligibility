@@ -35,7 +35,7 @@ test.describe("Not eligible - no affiliation", () => {
     ).toBeVisible();
 
     // Feedback banner: heading is visible and the survey link points to the
-    // external form in a new tab (assert attributes only — don't navigate out).
+    // external form in a new tab (assert attributes only, don't navigate out).
     const main = page.locator("main");
     await expect(
       main.getByRole("heading", {

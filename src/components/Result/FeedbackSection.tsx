@@ -14,7 +14,7 @@ interface Props {
 export default function FeedbackSection({ outcome, sessionId }: Props) {
   function handleSurveyClick() {
     // @ardc-ui/react Links stop click propagation, so GA4 auto outbound-click
-    // tracking never fires — track explicitly (see CLAUDE.md house rule).
+    // tracking never fires, so track explicitly (see CLAUDE.md house rule).
     if (sessionId) trackCtaClick(outcome, "feedback-survey", sessionId);
   }
 

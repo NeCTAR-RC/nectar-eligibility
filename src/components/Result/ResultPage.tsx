@@ -72,7 +72,7 @@ export default function ResultPage() {
                 variant="secondary"
                 isDisabled
                 state="loading"
-                loadingText="Generating…"
+                loadingText="Generating..."
               >
                 Download Summary
               </Button>

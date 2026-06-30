@@ -57,7 +57,7 @@ export async function downloadPdf(
       .then(function (this: Html2PdfWorker) {
         // Derive the page height from the actual rendered canvas so
         // the PDF page exactly fits the content. Both pageSize and
-        // opt.jsPDF.format must be patched — pageSize controls the
+        // opt.jsPDF.format must be patched: pageSize controls the
         // page-split ratio, opt.jsPDF.format controls the jsPDF
         // instance created in toPdf().
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -94,7 +94,7 @@ export async function downloadPdf(
   }
 }
 
-// ── Private helpers ──────────────────────────────────────────────────────────
+// Private helpers
 
 function buildPdfFilename(): string {
   const now = new Date();

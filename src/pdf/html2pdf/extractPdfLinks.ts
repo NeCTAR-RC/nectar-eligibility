@@ -14,7 +14,7 @@ const MM_PER_INCH = 25.4;
 /**
  * Extract link positions from an html2canvas-cloned document.
  *
- * Derives the px→mm scale from the container width. All links are
+ * Derives the px-to-mm scale from the container width. All links are
  * placed on page 1 (single-page PDF).
  */
 export function extractPdfLinks(doc: Document): PdfLinkInfo[] {

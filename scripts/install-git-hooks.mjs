@@ -108,6 +108,6 @@ for (const name of HOOKS) {
   log(`installed ${name}.`);
 }
 
-// 5. commit-msg is intentionally never written here — it is reserved for
+// 5. commit-msg is intentionally never written here; it is reserved for
 //    `git review -s` (Gerrit Change-Id hook).
 log("done. commit-msg left untouched for `git review -s`.");
