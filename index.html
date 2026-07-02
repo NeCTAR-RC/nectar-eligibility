@@ -107,9 +107,24 @@
         }
       ]
     </script>
+
+    <!-- Without JS the footer never hydrates, but its fallback links would
+         still occupy layout height (the inline opacity: 0 hides it visually
+         only), so remove it from layout entirely. -->
+    <noscript>
+      <style>
+        ardc-footer {
+          display: none;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
+
+    <noscript>
+      <!--STATIC_RULES-->
+    </noscript>
 
     <ardc-footer
       class="ardc-footer ardc-custom-component"
@@ -201,9 +216,5 @@
       defer
       data-no-optimize
     ></script>
-
-    <noscript>
-      <!--STATIC_RULES-->
-    </noscript>
   </body>
 </html>
