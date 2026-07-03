@@ -11,8 +11,7 @@ export function initializeAnalytics(): void {
   if (initialized) return;
 
   const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID as
-    | string
-    | undefined;
+    string | undefined;
   const debugMode = import.meta.env.VITE_GA_DEBUG_MODE === "true";
 
   if (!measurementId) {

@@ -4,7 +4,7 @@
 ARDC Nectar Research Cloud Eligibility Assessment tool. React SPA guiding users through eligibility determination for Nectar cloud resources.
 
 ## Tech Stack
-React 19 + TypeScript, React Router (BrowserRouter), Zustand 5 + Immer, @ardc-ui/react, CSS Modules + Sass, Vite 7, pnpm
+React 19 + TypeScript, React Router (BrowserRouter), Zustand 5 + Immer, @ardc-ui/react, CSS Modules + Sass, Vite 8, pnpm
 
 ## General Guidelines
 - Prefer smaller files for modularity and easier maintainence. Group them under folders always. Such as assets, components, data, store, styles and test.
@@ -76,7 +76,7 @@ pnpm format:check     # Check formatting (CI)
 **Pre-commit/push**: Run formatting, lint, unit tests, and E2E tests before committing or pushing:
 1. `pnpm format`: fix formatting
 2. `pnpm lint`: ESLint
-3. `pnpm build`: production build (includes `tsc -b`). Always use `pnpm build`, never `npx vite build` directly, because Vite's SWC transpiler strips types without checking them, so type errors won't be caught.
+3. `pnpm build`: production build (includes `tsc -b`). Always use `pnpm build`, never `npx vite build` directly, because Vite's transpiler strips types without checking them, so type errors won't be caught.
 4. `pnpm test`: unit tests
 5. `pnpm test:e2e`: E2E tests
 

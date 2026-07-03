@@ -22,7 +22,7 @@ This is the first project to use the **@ardc-ui/react** component library.
 - **React Router**: URL path-based navigation and browser history
 - **@ardc-ui/react**: ARDC component library (based on React Aria Components)
 - **CSS Modules + Sass**: Scoped component styling with design tokens
-- **Vite + SWC**: Build tool and dev server
+- **Vite**: Build tool and dev server
 - **pnpm**: Package manager
 
 ## Project Structure
