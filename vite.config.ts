@@ -11,7 +11,7 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        loadPaths: [path.resolve(__dirname, "src/styles")],
+        loadPaths: [path.resolve(import.meta.dirname, "src/styles")],
       },
     },
   },
