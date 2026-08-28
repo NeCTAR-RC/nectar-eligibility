@@ -161,6 +161,7 @@ The following organisations are ARDC Nectar member organisations. If you are aff
 - Cancer Council Victoria (CCV)
 - Melbourne Business School (MBS)
 - Monash University
+- Hudson Institute of Medical Research
 - Pawsey Supercomputing Research Centre (PSRC)
 - Curtin University
 - Edith Cowan University (ECU)

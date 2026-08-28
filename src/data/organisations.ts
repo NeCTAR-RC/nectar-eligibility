@@ -27,6 +27,10 @@ export const organisations: Organisation[] = [
   { id: "edith-cowan-university", name: "Edith Cowan University (ECU)" },
   { id: "flinders-university", name: "Flinders University" },
   { id: "griffith-university", name: "Griffith University" },
+  {
+    id: "hudson-institute",
+    name: "Hudson Institute of Medical Research",
+  },
   { id: "james-cook-university", name: "James Cook University (JCU)" },
   { id: "la-trobe-university", name: "La Trobe University" },
   { id: "melbourne-business-school", name: "Melbourne Business School (MBS)" },

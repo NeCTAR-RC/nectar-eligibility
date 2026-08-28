@@ -180,6 +180,7 @@ Full list: https://support.ehelp.edu.au/support/solutions/articles/6000264341
 
 ### Monash Node
 - Monash University
+- Hudson Institute of Medical Research
 
 ### Pawsey Node
 - Pawsey Supercomputing Research Centre (PSRC)
