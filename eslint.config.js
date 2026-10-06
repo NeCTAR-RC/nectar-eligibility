@@ -22,4 +22,13 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Content modules: JSX fragments exported as data, no components, so a
+    // fast refresh boundary does not apply. eslint-plugin-react-refresh 0.5.7
+    // checks exported objects as compound components and misreads them.
+    files: ["src/data/**/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
 ]);
