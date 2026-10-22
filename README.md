@@ -156,14 +156,11 @@ localStorage is cleared only when:
 
 ## Prerequisites
 
-- Node.js 24.12.0 or later (recommend using nvm)
-- pnpm (managed via Corepack)
-- Corepack enabled
+- pnpm 10 or later on your `PATH` (for example `brew install pnpm`). `pnpm install` then provides the pnpm and Node versions this repo pins.
 
 ## Getting Started
 
 ```bash
-corepack enable
 cd nectar-eligibility
 pnpm install
 pnpm dev
