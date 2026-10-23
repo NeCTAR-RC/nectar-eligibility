@@ -156,7 +156,7 @@ localStorage is cleared only when:
 
 ## Prerequisites
 
-- pnpm 10 or later on your `PATH` (for example `brew install pnpm`). `pnpm install` then provides the pnpm and Node versions this repo pins.
+- pnpm 10.5 or later on your `PATH` (for example `brew install pnpm`). `pnpm install` then provides the pnpm and Node versions this repo pins.
 
 ## Getting Started
 

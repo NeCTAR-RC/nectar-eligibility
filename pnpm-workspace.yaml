@@ -1,6 +1,5 @@
 allowBuilds:
   '@parcel/watcher': true
-  '@swc/core': true
   esbuild: true
   # core-js only prints a funding banner from its postinstall; it was never
   # allowed under pnpm 10 either.
